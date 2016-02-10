@@ -11,9 +11,12 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    Firebase ref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ref = new Firebase("https://glowing-inferno-5513.firebaseio.com");
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
