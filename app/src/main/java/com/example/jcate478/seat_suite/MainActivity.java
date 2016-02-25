@@ -16,6 +16,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.example.jcate478.seat_suite.login.Login;
+import com.example.jcate478.seat_suite.suite.SeatSuite;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient client;
     private Firebase firebaseRef;
     private Login log;
+    private SeatSuite suite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        suite = new SeatSuite(firebaseRef);
+        suite.run();
     }
 
     @Override

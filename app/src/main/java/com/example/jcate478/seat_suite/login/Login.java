@@ -16,8 +16,8 @@ public class Login {
 
     public void createUser(String user, String pword)
     {
-        ResultHandler results = new ResultHandler();
-        firebaseRef.createUser(user, pword, results);
+        //ResultHandler results = new ResultHandler();
+       // firebaseRef.createUser(user, pword, results);
     }
 
 }
