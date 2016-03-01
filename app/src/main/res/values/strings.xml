@@ -92,4 +92,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_selection">Selection</string>
+    <string name="title_activity_vendor_list">VendorList</string>
+    <string name="title_activity_chosen_vendor">ChosenVendor</string>
+    <string name="title_activity_checkout">Checkout</string>
+    <string name="title_activity_order_details">OrderDetails</string>
 </resources>
