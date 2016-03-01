@@ -26,10 +26,12 @@ public class SeatSuite {
     public SeatSuite (Firebase firebase)
     {
         this.firebase = firebase;
+
     }
 
     public void run()
     {
-
+        String hotdogs;
+        vendor vendor vendor = new vendor(hotdogs, );
     }
 }
