@@ -10,10 +10,9 @@ public class vendor {
     String vendorName;
     ArrayList<food> foodItems;
 
-    public vendor(String vendorName, ArrayList<food> foodItems)
+    public vendor(String vendorName)
     {
         this.vendorName = vendorName;
-        this.foodItems = foodItems;
     }
 
     public String getVendorName()
