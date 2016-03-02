@@ -1,11 +1,11 @@
 package com.example.jcate478.seat_suite;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.widget.Button;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,24 +31,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com");
-        Firebase.setAndroidContext(this);
-        log = new Login(firebaseRef);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // TODO: This log in shit working
+//        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com");
+      //  Firebase.setAndroidContext(this);
+     //   log = new Login(firebaseRef);
+
+        setContentView(R.layout.activity_main);
+
+        Button butt = (Button) findViewById(R.id.login_button);
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        butt.setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        startActivity(new Intent(MainActivity.this, Selection.class));
+                    }
+                });
     }
 
     @Override

@@ -12,4 +12,30 @@
     tools:context="com.example.jcate478.seat_suite.Selection"
     tools:showIn="@layout/activity_selection">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Section"
+        android:id="@+id/section_button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Type"
+        android:id="@+id/food_type_button"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vendor"
+        android:id="@+id/vendor_button"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

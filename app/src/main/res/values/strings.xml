@@ -97,4 +97,7 @@
     <string name="title_activity_chosen_vendor">ChosenVendor</string>
     <string name="title_activity_checkout">Checkout</string>
     <string name="title_activity_order_details">OrderDetails</string>
+    <string name="login_button">Continue</string>
+    <string name="title_activity_section_search">SectionSearch</string>
+    <string name="title_activity_shopping_cart">ShoppingCart</string>
 </resources>

@@ -51,6 +51,14 @@
         <activity
             android:name=".OrderDetails"
             android:label="@string/title_activity_order_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SectionSearch"
+            android:label="@string/title_activity_section_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShoppingCart"
+            android:label="@string/title_activity_shopping_cart"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

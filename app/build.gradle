@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions{
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -27,3 +32,6 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.0+'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
+
+
+

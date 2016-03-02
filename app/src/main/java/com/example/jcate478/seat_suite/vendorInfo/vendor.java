@@ -1,4 +1,4 @@
-package com.example.jcate478.seat_suite.suite.users;
+package com.example.jcate478.seat_suite.vendorInfo;
 
 import java.util.ArrayList;
 
@@ -9,16 +9,21 @@ public class vendor {
 
     String vendorName;
     ArrayList<food> foodItems;
+    int closestSection;
 
-    public vendor(String vendorName)
+    public vendor(String vendorName, int closestSection)
     {
         this.vendorName = vendorName;
+        this.closestSection = closestSection;
+        foodItems = new ArrayList<>();
     }
 
     public String getVendorName()
     {
         return vendorName;
     }
+
+    public int getClosestSection() {return closestSection;}
 
     public ArrayList<food> getFoodItems()
     {
@@ -33,6 +38,20 @@ public class vendor {
     public void setVendorName(String newName)
     {
         vendorName = newName;
+    }
+
+    public String toString()
+    {
+        String listIt;
+
+        listIt = "Vendor name is: " + vendorName + "\n\n";
+
+        for (int i = 0; i < foodItems.size(); i++)
+        {
+            listIt += foodItems.get(i).getName() + "\n" + foodItems.get(i).getPrice() + "\n\n";
+        }
+
+        return listIt;
     }
 
 }
