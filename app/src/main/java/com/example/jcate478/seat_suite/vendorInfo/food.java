@@ -5,8 +5,8 @@ package com.example.jcate478.seat_suite.vendorInfo;
  */
 public class food {
 
-    String name;
-    Double price;
+    private String name;
+    private Double price;
 
     public food(String name, Double price)
     {

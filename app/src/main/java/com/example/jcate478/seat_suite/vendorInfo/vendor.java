@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 public class vendor {
 
-    String vendorName;
-    ArrayList<food> foodItems;
-    int closestSection;
+    private String vendorName;
+    private ArrayList<food> foodItems;
+    private int closestSection;
 
     public vendor(String vendorName, int closestSection)
     {
