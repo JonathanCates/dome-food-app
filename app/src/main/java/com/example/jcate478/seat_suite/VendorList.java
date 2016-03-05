@@ -52,7 +52,7 @@ public class VendorList extends AppCompatActivity {
     }
 
     @Override
-    public void onButtonClickLisetner(int position, String value)
+    public void onButtonClickListener(int position, String value)
     {
         Toast.makeText(MainActivity.this, "Button click " + value,
                 Toast.LENGTH_SHORT).show();
