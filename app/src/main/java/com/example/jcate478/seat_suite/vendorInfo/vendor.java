@@ -1,11 +1,14 @@
 package com.example.jcate478.seat_suite.vendorInfo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by jcate478 on 2/24/2016.
  */
-public class vendor {
+public class vendor implements Parcelable{
 
     private String vendorName;
     private ArrayList<food> foodItems;
@@ -40,18 +43,33 @@ public class vendor {
         vendorName = newName;
     }
 
-    public String toString()
-    {
-        String listIt;
-
-        listIt = "Vendor name is: " + vendorName + "\n\n";
-
-        for (int i = 0; i < foodItems.size(); i++)
-        {
-            listIt += foodItems.get(i).getName() + "\n" + foodItems.get(i).getPrice() + "\n\n";
+    public static final Parcelable.Creator<vendor> CREATOR
+            = new Parcelable.Creator<vendor>() {
+        public vendor createFromParcel(Parcel in) {
+            return new vendor(in);
         }
 
-        return listIt;
+        public vendor[] newArray(int size) {
+            return new vendor[size];
+        }
+    };
+
+    private vendor(Parcel in) {
+        vendorName = in.readString();
+        closestSection = in.readInt();
+        foodItems = new ArrayList<>();
+        in.readTypedList(foodItems, food.CREATOR);
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(vendorName);
+        out.writeInt(closestSection);
+        out.writeTypedList(foodItems);
+    }
 }

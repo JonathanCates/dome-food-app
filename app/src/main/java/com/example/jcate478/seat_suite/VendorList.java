@@ -1,11 +1,15 @@
 package com.example.jcate478.seat_suite;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.jcate478.seat_suite.customFunctionality.ListAdapter;
+import com.example.jcate478.seat_suite.customFunctionality.VendorListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.*;
 
 import java.util.ArrayList;
@@ -46,16 +50,19 @@ public class VendorList extends AppCompatActivity {
             vendors.get(i).addFood("Churro" + i, 9.99);
             vendors.get(i).addFood("Other Crap" + i, 14.68);
         }
-            arrayAdapter = new ListAdapter(VendorList.this, vendors);
-            arrayAdapter.setCustomButtonListener(VendorList.this);
-            listView.setAdapter(arrayAdapter);
-    }
+        arrayAdapter = new VendorListAdapter(VendorList.this, R.layout.child_lineview, vendors);
+        listView.setAdapter(arrayAdapter);
 
-    @Override
-    public void onButtonClickListener(int position, String value)
-    {
-        Toast.makeText(MainActivity.this, "Button click " + value,
-                Toast.LENGTH_SHORT).show();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent session = new Intent(VendorList.this, ChosenVendor.class);
+                vendor chosenVendor = vendors.get(position);
+                session.putExtra("chosenVendor", chosenVendor);
+                startActivity(session);
+            }
+        });
     }
 
 }

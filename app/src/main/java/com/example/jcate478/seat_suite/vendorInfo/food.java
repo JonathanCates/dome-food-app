@@ -1,9 +1,12 @@
 package com.example.jcate478.seat_suite.vendorInfo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by jcate478 on 2/24/2016.
  */
-public class food {
+public class food implements Parcelable{
 
     private String name;
     private Double price;
@@ -32,5 +35,32 @@ public class food {
     public void setPrice(Double price)
     {
         this.price = price;
+    }
+
+   public static final Parcelable.Creator<food> CREATOR
+            = new Parcelable.Creator<food>() {
+        public food createFromParcel(Parcel in) {
+            return new food(in);
+        }
+
+        public food[] newArray(int size) {
+            return new food[size];
+        }
+    };
+
+    private food(Parcel in) {
+        name = in.readString();
+        price = in.readDouble();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(name);
+        out.writeDouble(price);
     }
 }
