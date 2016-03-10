@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.*;
@@ -62,6 +63,7 @@ public class ChosenVendor extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 shoppingCart.add(food.get(position));
+                Toast.makeText(ChosenVendor.this, food.get(position).getName() + "added to cart", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,4 +12,9 @@
     tools:context="com.example.jcate478.seat_suite.ShoppingCart"
     tools:showIn="@layout/activity_shopping_cart">
 
-</RelativeLayout>
+    <ListView
+        android:layout_width="wrap_contentt"
+        android:layout_height="wrap_content"
+        android:id="@+id/shopping_cart"/>
+
+</LinearLayout>
