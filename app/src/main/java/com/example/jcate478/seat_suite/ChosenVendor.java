@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
@@ -42,6 +43,19 @@ public class ChosenVendor extends AppCompatActivity {
     {
         arrayAdapter = new FoodListAdapter(ChosenVendor.this, R.layout.child_lineview, food);
         listView.setAdapter(arrayAdapter);
+
+        Button cartButt = (Button) findViewById(R.id.cart);
+
+
+        cartButt.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent session = new Intent(ChosenVendor.this, ShoppingCart.class);
+                        session.putParcelableArrayListExtra("cart", shoppingCart);
+                        startActivity(session);
+                    }
+                });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

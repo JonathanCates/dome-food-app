@@ -8,40 +8,69 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#dafcff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.jcate478.seat_suite.MainActivity"
     tools:showIn="@layout/activity_main">
 
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_marginTop="120dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Login"
+        android:textColor="#ffffff"
+        android:background="#339999"
+        android:id="@+id/login_button"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/register"
+        android:layout_alignStart="@+id/register"
+        android:layout_marginTop="31dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continue"
-        android:id="@+id/login_button"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Register"
+        android:textColor="#ffffff"
+        android:background="#5e0243"
+        android:id="@+id/register"
+        android:layout_marginBottom="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="58dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:inputType="textEmailAddress"
+        android:background="#ffffff"
+        android:ems="12"
+        android:id="@+id/email"
+        android:text="Email"
+        android:layout_above="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:background="#ffffff"
+        android:ems="12"
+        android:height="16dp"
+        android:id="@+id/password"
+        android:text="Password"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Seat Suite"
+        android:textColor="#339999"
+        android:textSize="55dp"
+        android:id="@+id/seatSuite"
+        android:layout_marginBottom="34dp"
+        android:layout_above="@+id/email"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

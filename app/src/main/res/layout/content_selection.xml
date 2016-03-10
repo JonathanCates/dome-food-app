@@ -8,34 +8,88 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#dafcff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.jcate478.seat_suite.Selection"
     tools:showIn="@layout/activity_selection">
 
+
+       <!-- android:background="@drawable/round_button" -->
     <Button
+        android:background="#5e0243"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="150dp"
+        android:height="75dp"
         android:text="Section"
+        android:textColor="#ffffff"
         android:id="@+id/section_button"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp" />
+        android:layout_marginTop="72dp"
+        android:layout_below="@+id/chooseyourfood"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="150dp"
+        android:height="75dp"
         android:text="Food Type"
+        android:background="#5e0243"
+        android:textColor="#ffffff"
         android:id="@+id/food_type_button"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_alignTop="@+id/vendor_button"
+        android:layout_alignLeft="@+id/account"
+        android:layout_alignStart="@+id/account" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="150dp"
+        android:height="75dp"
         android:text="Vendor"
+        android:background="#5e0243"
+        android:textColor="#ffffff"
         android:id="@+id/vendor_button"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/section_button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="180dp"
+        android:text="Account"
+        android:textColor="#ffffff"
+        android:background="#339999"
+        android:id="@+id/account"
+        android:layout_marginBottom="39dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="180dp"
+        android:text="Order History"
+        android:textColor="#ffffff"
+        android:background="#339999"
+        android:id="@+id/orderHistory"
+        android:layout_alignTop="@+id/account"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Choose Your Food"
+        android:textColor="#339999"
+        android:textSize="30dp"
+        android:id="@+id/chooseyourfood"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
+
 </RelativeLayout>
