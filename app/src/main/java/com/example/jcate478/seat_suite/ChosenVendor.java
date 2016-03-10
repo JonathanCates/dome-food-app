@@ -63,7 +63,7 @@ public class ChosenVendor extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 shoppingCart.add(food.get(position));
-                Toast.makeText(ChosenVendor.this, food.get(position).getName() + "added to cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChosenVendor.this, food.get(position).getName() + " added to cart", Toast.LENGTH_SHORT).show();
             }
         });
     }

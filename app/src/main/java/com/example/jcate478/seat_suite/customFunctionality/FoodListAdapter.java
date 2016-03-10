@@ -40,6 +40,8 @@ public class FoodListAdapter extends ArrayAdapter<food> {
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView
                     .findViewById(R.id.childTextView);
+            viewHolder.text = (TextView) convertView
+                    .findViewById(R.id.priceTag);
             convertView.setTag(viewHolder);
         }
         else

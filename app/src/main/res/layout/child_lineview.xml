@@ -15,4 +15,10 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true" />
 
+    <TextView
+        android:id="@+id/priceTag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
+
 </RelativeLayout>
