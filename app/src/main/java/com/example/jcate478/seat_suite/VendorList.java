@@ -45,10 +45,12 @@ public class VendorList extends AppCompatActivity {
 
         for(int i = 0; i < vendors.size(); i++)
         {
-            vendors.get(i).addFood("Chicken" + i, 20.00);
-            vendors.get(i).addFood("Burger" + i, 18.21);
-            vendors.get(i).addFood("Churro" + i, 9.99);
-            vendors.get(i).addFood("Other Crap" + i, 14.68);
+            vendors.get(i).addFood("Chicken" + i, 4, 20.00);
+            vendors.get(i).addFood("Burger" + i, 2, 18.21);
+            vendors.get(i).addFood("Churro" + i, 5, 9.99);
+            vendors.get(i).addFood("Other Crap" + i, 6, 14.68);
+            vendors.get(i).addFood("Beer" + i, 1, 14.68);
+            vendors.get(i).addFood("Hot Dog" + i, 3, 14.68);
         }
         arrayAdapter = new VendorListAdapter(VendorList.this, R.layout.child_lineview, vendors);
         listView.setAdapter(arrayAdapter);

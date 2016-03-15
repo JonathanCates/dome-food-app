@@ -33,9 +33,9 @@ public class vendor implements Parcelable{
         return foodItems;
     }
 
-    public void addFood(String name, double price)
+    public void addFood(String name, int itemType, double price)
     {
-        foodItems.add(new food(name, price));
+        foodItems.add(new food(name, itemType, price));
     }
 
     public void setVendorName(String newName)

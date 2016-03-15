@@ -9,11 +9,14 @@ import android.os.Parcelable;
 public class food implements Parcelable{
 
     private String name;
+    private int itemType;
     private Double price;
 
-    public food(String name, Double price)
+
+    public food(String name, int itemType, Double price)
     {
         this.name = name;
+        this.itemType = itemType;
         this.price = price;
     }
 
@@ -21,6 +24,8 @@ public class food implements Parcelable{
     {
         return name;
     }
+
+    public int getItemType() { return itemType;}
     
     public Double getPrice()
     {
@@ -31,6 +36,8 @@ public class food implements Parcelable{
     {
         this.name = name;
     }
+
+    public void setitemType(int itemType) { this.itemType = itemType}
 
     public void setPrice(Double price)
     {
@@ -50,6 +57,7 @@ public class food implements Parcelable{
 
     private food(Parcel in) {
         name = in.readString();
+        itemType = in.readInt();
         price = in.readDouble();
     }
 
@@ -61,6 +69,7 @@ public class food implements Parcelable{
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(name);
+        out.writeInt(itemType);
         out.writeDouble(price);
     }
 }
