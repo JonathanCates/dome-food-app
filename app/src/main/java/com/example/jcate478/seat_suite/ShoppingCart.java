@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
-import com.example.jcate478.seat_suite.vendorInfo.food;
+import com.example.jcate478.seat_suite.vendorInfo.Food;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ShoppingCart extends AppCompatActivity {
 
 
-    private ArrayList<food> foodCart;
+    private ArrayList<Food> foodCart;
     private ListView listView;
     private FoodListAdapter arrayAdapter;
     private double price;

@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class ChosenVendor extends AppCompatActivity {
 
-    private vendor vendor;
-    private ArrayList<food> food;
-    private ArrayAdapter<food> arrayAdapter;
-    private ArrayList<food> shoppingCart;
+    private Vendor vendor;
+    private ArrayList<Food> food;
+    private ArrayAdapter<Food> arrayAdapter;
+    private ArrayList<Food> shoppingCart;
     private ListView listView;
 
     @Override
@@ -33,7 +33,7 @@ public class ChosenVendor extends AppCompatActivity {
 
         shoppingCart = new ArrayList<>();
         Intent i = getIntent();
-        vendor = (vendor) i.getParcelableExtra("chosenVendor");
+        vendor = (Vendor) i.getParcelableExtra("chosenVendor");
         food = vendor.getFoodItems();
 
         listView = (ListView)findViewById(R.id.chosen_vendor_food);

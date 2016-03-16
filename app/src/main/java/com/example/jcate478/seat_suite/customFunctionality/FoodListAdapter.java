@@ -8,20 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.jcate478.seat_suite.R;
-import com.example.jcate478.seat_suite.vendorInfo.food;
+import com.example.jcate478.seat_suite.vendorInfo.Food;
 
 import java.util.ArrayList;
 
 /**
  * Created by jcate478 on 3/2/2016.
  */
-public class FoodListAdapter extends ArrayAdapter<food> {
+public class FoodListAdapter extends ArrayAdapter<Food> {
 
-    private ArrayList<food> foods;
+    private ArrayList<Food> foods;
     private Context context;
     private int layoutResourceId;
 
-    public FoodListAdapter(Context context, int layoutResourceId, ArrayList<food> foods)
+    public FoodListAdapter(Context context, int layoutResourceId, ArrayList<Food> foods)
     {
         super(context, layoutResourceId, foods);
         this.foods = foods;
@@ -49,7 +49,7 @@ public class FoodListAdapter extends ArrayAdapter<food> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        food temp = foods.get(position);
+        Food temp = foods.get(position);
         viewHolder.text.setText(temp.getName());
 
         return convertView;

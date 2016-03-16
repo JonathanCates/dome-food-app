@@ -3,22 +3,25 @@ package com.example.jcate478.seat_suite.vendorInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by jcate478 on 2/24/2016.
  */
-public class vendor implements Parcelable{
+public class Vendor implements Parcelable{
 
     private String vendorName;
-    private ArrayList<food> foodItems;
+    private ArrayList<Food> foodItems;
     private int closestSection;
+    private ArrayList<Integer> vendorFoodTypes;
 
-    public vendor(String vendorName, int closestSection)
+    public Vendor(String vendorName, int closestSection)
     {
         this.vendorName = vendorName;
         this.closestSection = closestSection;
         foodItems = new ArrayList<>();
+        vendorFoodTypes = new ArrayList<>();
     }
 
     public String getVendorName()
@@ -28,14 +31,17 @@ public class vendor implements Parcelable{
 
     public int getClosestSection() {return closestSection;}
 
-    public ArrayList<food> getFoodItems()
+    public ArrayList<Food> getFoodItems()
     {
         return foodItems;
     }
 
+    public ArrayList<Integer> getVendorFoodTypes() {return vendorFoodTypes;}
+
     public void addFood(String name, int itemType, double price)
     {
-        foodItems.add(new food(name, itemType, price));
+        foodItems.add(new Food(name, itemType, price));
+        vendorFoodTypes.add(itemType);
     }
 
     public void setVendorName(String newName)
@@ -43,22 +49,22 @@ public class vendor implements Parcelable{
         vendorName = newName;
     }
 
-    public static final Parcelable.Creator<vendor> CREATOR
-            = new Parcelable.Creator<vendor>() {
-        public vendor createFromParcel(Parcel in) {
-            return new vendor(in);
+    public static final Parcelable.Creator<Vendor> CREATOR
+            = new Parcelable.Creator<Vendor>() {
+        public Vendor createFromParcel(Parcel in) {
+            return new Vendor(in);
         }
 
-        public vendor[] newArray(int size) {
-            return new vendor[size];
+        public Vendor[] newArray(int size) {
+            return new Vendor[size];
         }
     };
 
-    private vendor(Parcel in) {
+    private Vendor(Parcel in) {
         vendorName = in.readString();
         closestSection = in.readInt();
         foodItems = new ArrayList<>();
-        in.readTypedList(foodItems, food.CREATOR);
+        in.readTypedList(foodItems, Food.CREATOR);
     }
 
     @Override
@@ -67,6 +73,10 @@ public class vendor implements Parcelable{
     }
 
     @Override
+    /**
+     * writes to parcel to be passed between activities
+     * Intentional does not pass in the vendorFoodTypes Arraylist as this will only be invoked once this vendor is chosen, and that is not needed at that point anymore in the flow
+     */
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(vendorName);
         out.writeInt(closestSection);

@@ -9,20 +9,20 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import com.example.jcate478.seat_suite.R;
-import com.example.jcate478.seat_suite.vendorInfo.vendor;
+import com.example.jcate478.seat_suite.vendorInfo.Vendor;
 
 import java.util.ArrayList;
 
 /**
  * Created by jcate478 on 3/2/2016.
  */
-public class VendorListAdapter extends ArrayAdapter<vendor> {
+public class VendorListAdapter extends ArrayAdapter<Vendor> {
 
-    private ArrayList<vendor> vendors;
+    private ArrayList<Vendor> vendors;
     private Context context;
     private int layoutResourceId;
 
-    public VendorListAdapter(Context context, int layoutResourceId, ArrayList<vendor> vendors)
+    public VendorListAdapter(Context context, int layoutResourceId, ArrayList<Vendor> vendors)
     {
         super(context, layoutResourceId, vendors);
         this.vendors= vendors;
@@ -48,7 +48,7 @@ public class VendorListAdapter extends ArrayAdapter<vendor> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        vendor temp = vendors.get(position);
+        Vendor temp = vendors.get(position);
         viewHolder.text.setText(temp.getVendorName());
 
         return convertView;

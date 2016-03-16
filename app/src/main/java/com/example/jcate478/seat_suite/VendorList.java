@@ -16,9 +16,11 @@ import java.util.ArrayList;
 
 public class VendorList extends AppCompatActivity {
 
-    private ArrayList<vendor> vendors;
+    private ArrayList<Vendor> vendors;
     private ListView listView;
-    private ArrayAdapter<vendor> arrayAdapter;
+    private ArrayAdapter<Vendor> arrayAdapter;
+    private ArrayList<Vendor> vendorsHaveItemType;
+    private int foodType;
 
 
     @Override
@@ -28,8 +30,15 @@ public class VendorList extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.vendor_list);
 
+        Intent i = getIntent();
+        foodType = i.getIntExtra("foodtype", Food.DEFAULT_TYPE);
+
+
         vendors = new ArrayList<>();
+        vendorsHaveItemType = new ArrayList<>();
         populateVendors();
+
+        setClick();
     }
 
     /**
@@ -37,30 +46,59 @@ public class VendorList extends AppCompatActivity {
      */
     private void populateVendors()
     {
-        vendors.add(new vendor("Jimmy's Hot Dogs", 222));
-        vendors.add(new vendor("Burgers, Burgers, Burgers", 231));
-        vendors.add(new vendor("Just Food", 220));
-        vendors.add(new vendor("BEER maybe", 184));
-        vendors.add(new vendor("Churro Zone", 150));
+        vendors.add(new Vendor("Jimmy's Hot Dogs", 222));
+        vendors.add(new Vendor("Burgers, Burgers, Burgers", 231));
+        vendors.add(new Vendor("Just Food", 220));
+        vendors.add(new Vendor("BEER maybe", 184));
+        vendors.add(new Vendor("Churro Zone", 150));
 
         for(int i = 0; i < vendors.size(); i++)
         {
-            vendors.get(i).addFood("Chicken" + i, 4, 20.00);
-            vendors.get(i).addFood("Burger" + i, 2, 18.21);
-            vendors.get(i).addFood("Churro" + i, 5, 9.99);
-            vendors.get(i).addFood("Other Crap" + i, 6, 14.68);
-            vendors.get(i).addFood("Beer" + i, 1, 14.68);
-            vendors.get(i).addFood("Hot Dog" + i, 3, 14.68);
+            if(i <= 2)
+            {
+            vendors.get(i).addFood("Chicken Fingers " + i, Food.CHICKEN_FINGERS_TYPE, 20.00);
+            vendors.get(i).addFood("Burger " + i, Food.BURGER_TYPE, 18.21);
+            vendors.get(i).addFood("Churro " + i, Food.CHURRO_TYPE, 9.99);
+            }
+            vendors.get(i).addFood("Snacks " + i, Food.SNACKS_TYPE, 14.68);
+            if(i > 2)
+            {
+            vendors.get(i).addFood("Beer " + i, Food.BEER_TYPE, 6.67);
+            vendors.get(i).addFood("Hot Dog " + i, Food.HOT_DOG_TYPE, 3.28);
+            }
         }
-        arrayAdapter = new VendorListAdapter(VendorList.this, R.layout.child_lineview, vendors);
+
+        if(foodType != Food.DEFAULT_TYPE)
+        {
+            for (int i = 0; i < vendors.size(); i++)
+            {
+                ArrayList<Integer> vendorFoodTypes = vendors.get(i).getVendorFoodTypes();
+                for (int j = 0; j < vendorFoodTypes.size(); j++)
+                {
+                    if(vendorFoodTypes.get(j) == foodType)
+                    {
+                        vendorsHaveItemType.add(vendors.get(i));
+                    }
+                }
+            }
+            arrayAdapter = new VendorListAdapter(VendorList.this, R.layout.child_lineview, vendorsHaveItemType);
+        }
+        else {
+            arrayAdapter = new VendorListAdapter(VendorList.this, R.layout.child_lineview, vendors);
+        }
+
         listView.setAdapter(arrayAdapter);
 
+    }
+
+    private void setClick()
+    {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Intent session = new Intent(VendorList.this, ChosenVendor.class);
-                vendor chosenVendor = vendors.get(position);
+                Vendor chosenVendor = vendors.get(position);
                 session.putExtra("chosenVendor", chosenVendor);
                 startActivity(session);
             }

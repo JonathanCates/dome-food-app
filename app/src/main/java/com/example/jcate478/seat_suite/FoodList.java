@@ -1,50 +1,62 @@
 package com.example.jcate478.seat_suite;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
+import com.example.jcate478.seat_suite.vendorInfo.Food;
+
+import java.util.ArrayList;
 
 public class FoodList extends AppCompatActivity {
 
-    private ArrayList<String> itemTypes;
+    private ArrayList<Food> itemTypes;
     private ListView listViewOfItemTypes;
-    private ArrayAdapter<itemTypes> itemTypesAdapter;
+    private ArrayAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
-        listViewOfItemTypes = (ListView)findViewById(R.id.item_type);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        listViewOfItemTypes = (ListView)findViewById(R.id.food_list);
 
         itemTypes = new ArrayList<>();
         populateItemTypes();
+
+        clickAction();
 
     }
 
     private void populateItemTypes()
     {
-        itemTypes.add(new itemType("Beer");
-        itemTypes.add(new itemType("Burgers");
-        itemTypes.add(new itemType("Hot Dogs");
-        itemTypes.add(new itemType("Churro");
-        itemTypes.add(new itemType("Chicken");
-        itemTypes.add(new itemType("Other"));
+        itemTypes.add(new Food("Beer", Food.BEER_TYPE));
+        itemTypes.add(new Food("Burgers", Food.BURGER_TYPE));
+        itemTypes.add(new Food("Chicken Fingers", Food.CHICKEN_FINGERS_TYPE));
+        itemTypes.add(new Food("Churro", Food.CHURRO_TYPE));
+        itemTypes.add(new Food("Snacks", Food.SNACKS_TYPE));
+        itemTypes.add(new Food("Hot Dog", Food.HOT_DOG_TYPE));
 
-        listViewOfItemTypes.setAdapter(itemTypesAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listAdapter = new FoodListAdapter(FoodList.this, R.layout.child_lineview, itemTypes);
+        listViewOfItemTypes.setAdapter(listAdapter);
+
+    }
+
+    private void clickAction()
+    {
+        listViewOfItemTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //TODO Function to get all food with that Item Type
-
+                Intent session = new Intent(FoodList.this, VendorList.class);
+                int foodType = itemTypes.get(position).getItemType();
+                session.putExtra("foodtype", foodType);
                 startActivity(session);
             }
         });
