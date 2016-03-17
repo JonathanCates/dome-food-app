@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,13 +45,17 @@ public class ShoppingCart extends AppCompatActivity {
         totalCost = (TextView) findViewById(R.id.finalCost);
 
         listShoppingCart();
+        calculateCost();
     }
 
     private void listShoppingCart()
     {
         arrayAdapter = new FoodListAdapter(ShoppingCart.this, R.layout.child_lineview, foodCart);
         listView.setAdapter(arrayAdapter);
+    }
 
+    private void calculateCost()
+    {
         for (int i = 0; i < foodCart.size(); i++)
         {
             price += foodCart.get(i).getPrice();
@@ -58,6 +64,18 @@ public class ShoppingCart extends AppCompatActivity {
         preGst.setText(df.format(price));
         gst.setText(df.format(price * 0.05)); // Canadian GST is 5%, Alberta has no PST so not added in hardcode, will change if expanded outside AB
         totalCost.setText(df.format(price * 1.05));
+    }
 
+    private void setClick()
+    {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                foodCart.remove(position);
+                listShoppingCart();
+                calculateCost();
+            }
+        });
     }
 }
