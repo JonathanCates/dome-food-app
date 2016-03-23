@@ -100,4 +100,6 @@
     <string name="login_button">Continue</string>
     <string name="title_activity_section_search">SectionSearch</string>
     <string name="title_activity_shopping_cart">ShoppingCart</string>
+    <string name="title_activity_vendor_dash">VendorDash</string>
+    <string name="title_activity_registration">Registration</string>
 </resources>

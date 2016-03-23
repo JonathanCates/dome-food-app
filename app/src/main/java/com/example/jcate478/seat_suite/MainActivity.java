@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.appindexing.Action;
@@ -38,16 +39,48 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        Button butt = (Button) findViewById(R.id.login_button);
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        butt.setOnClickListener(
-                new View.OnClickListener(){
+
+        buttons();
+
+    }
+
+    private void buttons()
+    {
+        Button log = (Button) findViewById(R.id.login_button);
+        Button register = (Button) findViewById(R.id.register);
+
+        log.setOnClickListener(
+                new View.OnClickListener()
+                {
                     @Override
-                    public void onClick(View v){
-                        startActivity(new Intent(MainActivity.this, Selection.class));
+                    public void onClick(View v)
+                    {
+
+                        EditText login = (EditText) findViewById(R.id.email);
+                        String logTest = login.getText().toString();
+
+                        if(logTest.contains("@"))
+                        {
+                            startActivity(new Intent(MainActivity.this, Selection.class));
+                        }
+                        else
+                        {
+                            startActivity(new Intent(MainActivity.this, VendorDash.class));
+                        }
+
+                    }
+                });
+
+        register.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        startActivity(new Intent(MainActivity.this, Registration.class));
                     }
                 });
     }
