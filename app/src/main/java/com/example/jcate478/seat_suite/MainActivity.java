@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView titleFont = (TextView) findViewById(R.id.seatSuite);
-        Typeface signPainter = Typeface.createFromAsset(getAssets(), "Fonts/signPainter");
+        Typeface signPainter = Typeface.createFromAsset(getAssets(), "SignPainter-HouseScript.ttf");
         titleFont.setTypeface(signPainter);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.

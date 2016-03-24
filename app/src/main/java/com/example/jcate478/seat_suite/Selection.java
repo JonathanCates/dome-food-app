@@ -20,7 +20,7 @@ public class Selection extends AppCompatActivity {
 
         TextView titleFont = (TextView) findViewById(R.id.seatSuite);
         TextView searchFont = (TextView) findViewById(R.id.chooseyourfood);
-        Typeface signPainter = Typeface.createFromAsset(getAssets(), "Fonts/signPainter");
+        Typeface signPainter = Typeface.createFromAsset(getAssets(), "SignPainter-HouseScript.ttf");
         titleFont.setTypeface(signPainter);
         searchFont.setTypeface(signPainter);
 
