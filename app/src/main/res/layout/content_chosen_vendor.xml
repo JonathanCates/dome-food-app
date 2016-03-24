@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#dafcff"
+    android:background="#94B9D1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.jcate478.seat_suite.ChosenVendor"
     tools:showIn="@layout/activity_chosen_vendor">
@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="0"
-        android:id="@+id/chosen_vendor_food"
-        android:listSelector="#ffffff"/>
+        android:id="@+id/chosen_vendor_food" />
 
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
 
         <Button
             android:layout_width="match_parent"
@@ -33,4 +33,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+`</RelativeLayout>

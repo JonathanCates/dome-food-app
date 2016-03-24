@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#dafcff"
+    android:background="#94B9D1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.jcate478.seat_suite.FoodList"
     tools:showIn="@layout/activity_food_list">
@@ -12,9 +12,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/food_list"
-        android:listSelector="#ffffff"
-        />
+        android:id="@+id/food_list"/>
 
 
 </LinearLayout>

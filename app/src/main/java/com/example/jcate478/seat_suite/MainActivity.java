@@ -1,6 +1,7 @@
 package com.example.jcate478.seat_suite;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.appindexing.Action;
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
      //   log = new Login(firebaseRef);
 
         setContentView(R.layout.activity_main);
+
+        TextView titleFont = (TextView) findViewById(R.id.seatSuite);
+        Typeface signPainter = Typeface.createFromAsset(getAssets(), "Fonts/signPainter");
+        titleFont.setTypeface(signPainter);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v)
                     {
-                        startActivity(new Intent(MainActivity.this, Registration.class));
+                        startActivityForResult(new Intent(MainActivity.this, Registration.class), 1);
                     }
                 });
     }

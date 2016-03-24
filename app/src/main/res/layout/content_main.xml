@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#dafcff"
+    android:background="#C17B7B"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.jcate478.seat_suite.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textColor="#ffffff"
-        android:background="#339999"
+        android:textColor="#811010"
+        android:background="#E8BDBD"
         android:id="@+id/login_button"
         android:layout_below="@+id/password"
         android:layout_alignLeft="@+id/register"
@@ -30,14 +30,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:textColor="#ffffff"
-        android:background="#5e0243"
+        android:textColor="#E8BDBD"
+        android:background="#A24747"
         android:id="@+id/register"
         android:layout_marginBottom="65dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
+        android:selectAllOnFocus="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
@@ -50,6 +51,7 @@
         android:layout_marginBottom="44dp" />
 
     <EditText
+        android:selectAllOnFocus="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -66,11 +68,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Seat Suite"
-        android:textColor="#339999"
-        android:textSize="55dp"
+        android:textColor="#E8BDBD"
+        android:textSize="70dp"
         android:id="@+id/seatSuite"
-        android:layout_marginBottom="34dp"
-        android:layout_above="@+id/email"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp" />
 
 </RelativeLayout>
