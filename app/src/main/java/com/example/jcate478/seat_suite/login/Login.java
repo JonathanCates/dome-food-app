@@ -2,6 +2,8 @@ package com.example.jcate478.seat_suite.login;
 
 import com.firebase.client.Firebase;
 
+import java.util.Map;
+
 /**
  * Created by jcate478 on 2/10/2016.
  */
@@ -16,8 +18,12 @@ public class Login {
 
     public void createUser(String user, String pword)
     {
-        //ResultHandler results = new ResultHandler();
-       // firebaseRef.createUser(user, pword, results);
+        firebaseRef.createUser(user, pword, new ResultHandler());
+    }
+
+    public void authWithPassword(String user, String pword)
+    {
+        firebaseRef.authWithPassword(user,pword, new AuthResultHandler());
     }
 
 }

@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // TODO: This log in shit working
-//        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com");
-      //  Firebase.setAndroidContext(this);
-     //   log = new Login(firebaseRef);
+        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com");
+        Firebase.setAndroidContext(this);
+        log = new Login(firebaseRef);
 
         setContentView(R.layout.activity_main);
 
@@ -55,21 +55,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void buttons()
     {
-        Button log = (Button) findViewById(R.id.login_button);
+        Button login = (Button) findViewById(R.id.login_button);
         Button register = (Button) findViewById(R.id.register);
 
-        log.setOnClickListener(
+        login.setOnClickListener(
                 new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
                     {
 
-                        EditText login = (EditText) findViewById(R.id.email);
-                        String logTest = login.getText().toString();
+                        EditText user = (EditText) findViewById(R.id.email);
+                        EditText pword = (EditText) findViewById(R.id.password);
+                        String username = user.getText().toString();
+                        String password = pword.getText().toString();
 
-                        if(logTest.contains("@"))
+                        if(username.contains("@"))
                         {
+                            log.authWithPassword(username, password);
                             startActivity(new Intent(MainActivity.this, Selection.class));
                         }
                         else

@@ -23,9 +23,14 @@ public class Registration extends AppCompatActivity {
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        finishActivity(1);
+                        register()
                     }
                 });
+
+    }
+
+    private void register()
+    {
 
     }
 
