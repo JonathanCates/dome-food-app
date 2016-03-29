@@ -11,9 +11,9 @@ public class Login {
 
     Firebase firebaseRef;
 
-    public Login(Firebase firebaseRef)
+    public Login()
     {
-        this.firebaseRef = firebaseRef;
+        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/");
     }
 
     public void createUser(String user, String pword)

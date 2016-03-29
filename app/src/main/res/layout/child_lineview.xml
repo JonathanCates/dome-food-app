@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#94B9D1"
+    android:background="#689696"
     tools:context="com.example.jcate478.seat_suite.VendorList">
 
     <TextView

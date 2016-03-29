@@ -43,7 +43,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:background="#ffffff"
-        android:id="@+id/editText"
+        android:id="@+id/lastName"
         android:layout_alignBaseline="@+id/LastName"
         android:layout_alignBottom="@+id/LastName"
         android:layout_alignParentRight="true"
@@ -55,9 +55,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Email"
         android:textColor="#D2E7ED"
-        android:id="@+id/email"
+        android:id="@+id/emailText"
         android:layout_marginTop="37dp"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/lastName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -92,7 +92,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:background="#ffffff"
-        android:id="@+id/editText2"
+        android:id="@+id/firstName"
         android:layout_alignTop="@+id/FirstName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -103,10 +103,10 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:background="#ffffff"
-        android:id="@+id/editText3"
-        android:layout_alignBottom="@+id/email"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:id="@+id/email"
+        android:layout_alignBottom="@+id/emailText"
+        android:layout_alignLeft="@+id/lastName"
+        android:layout_alignStart="@+id/lastName" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -114,10 +114,10 @@
         android:inputType="textPassword"
         android:ems="10"
         android:background="#ffffff"
-        android:id="@+id/editText4"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3" />
+        android:id="@+id/pword"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -125,10 +125,10 @@
         android:inputType="textPassword"
         android:ems="10"
         android:background="#ffffff"
-        android:id="@+id/editText5"
+        android:id="@+id/pwordCheck"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4" />
+        android:layout_alignLeft="@+id/pword"
+        android:layout_alignStart="@+id/pword" />
 
     <Button
         android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
         android:text="next"
         android:id="@+id/next"
         android:textColor="#D2E7ED"
-        android:background="#2C7D7D"
+        android:background="@drawable/light_rectangle_button"
         android:width="180dp"
         android:layout_marginBottom="35dp"
         android:layout_alignParentBottom="true"
@@ -149,8 +149,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Seat Suite"
         android:textColor="#D2E7ED"
-        android:textSize="45dp"
-        android:id="@+id/RegistrationTitle"
+        android:textSize="80dp"
+        android:id="@+id/seatSuite"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

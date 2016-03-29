@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    private Firebase firebaseRef;
     private Login log;
 
     @Override
@@ -35,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // TODO: This log in shit working
-        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com");
         Firebase.setAndroidContext(this);
-        log = new Login(firebaseRef);
+        log = new Login();
 
         setContentView(R.layout.activity_main);
 
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v)
                     {
 
-                        EditText user = (EditText) findViewById(R.id.email);
+                        EditText user = (EditText) findViewById(R.id.emailText);
                         EditText pword = (EditText) findViewById(R.id.password);
                         String username = user.getText().toString();
                         String password = pword.getText().toString();

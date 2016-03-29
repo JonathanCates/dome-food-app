@@ -1,5 +1,7 @@
 package com.example.jcate478.seat_suite.login;
 
+import android.widget.Toast;
+
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
@@ -11,6 +13,7 @@ public class ResultHandler implements Firebase.ResultHandler
 
     @Override
     public void onSuccess() {
+
 
     }
 
