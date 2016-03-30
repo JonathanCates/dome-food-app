@@ -1,9 +1,12 @@
 package com.example.jcate478.seat_suite;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,12 +15,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import com.example.jcate478.seat_suite.login.Login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,18 +29,46 @@ public class MainActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
+    private Button login;
+    private Button register;
     private GoogleApiClient client;
-    private Login log;
+    private Firebase firebaseRef;
+
+    /* A dialog that is presented until the Firebase authentication finished. */
+    private ProgressDialog mAuthProgressDialog;
+
+    /* Data from the authenticated user */
+    private AuthData mAuthData;
+
+    /* Listener for Firebase session changes */
+    private Firebase.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         // TODO: This log in shit working
         Firebase.setAndroidContext(this);
-        log = new Login();
+        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/");
 
-        setContentView(R.layout.activity_main);
+        /* Setup the progress dialog that is displayed later when authenticating with Firebase */
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
+        mAuthProgressDialog.show();
+
+        mAuthStateListener = new Firebase.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                mAuthProgressDialog.hide();
+                setAuthenticatedUser(authData);
+            }
+        };
+        /* Check if the user is authenticated with Firebase already. If this is the case we can set the authenticated
+         * user and hide hide any login buttons */
+        firebaseRef.addAuthStateListener(mAuthStateListener);
 
         TextView titleFont = (TextView) findViewById(R.id.seatSuite);
         Typeface signPainter = Typeface.createFromAsset(getAssets(), "SignPainter-HouseScript.ttf");
@@ -53,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void buttons()
     {
-        Button login = (Button) findViewById(R.id.login_button);
-        Button register = (Button) findViewById(R.id.register);
+        login = (Button) findViewById(R.id.login_button);
+        register = (Button) findViewById(R.id.register);
 
         login.setOnClickListener(
                 new View.OnClickListener()
@@ -70,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if(username.contains("@"))
                         {
-                            log.authWithPassword(username, password);
+                            loginWithPassword(username, password);
                             startActivity(new Intent(MainActivity.this, Selection.class));
                         }
                         else
@@ -90,6 +121,66 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(new Intent(MainActivity.this, Registration.class), 1);
                     }
                 });
+    }
+
+    private void loginWithPassword(String username, String password)
+    {
+        mAuthProgressDialog.show();
+        firebaseRef.authWithPassword(username, password, new AuthResultHandler("password"));
+    }
+
+    private void setAuthenticatedUser(AuthData authData) {
+        if (authData != null) {
+            /* Hide all the login buttons */
+            login.setVisibility(View.GONE);
+            /* show a provider specific status text */
+            String name = null;
+            if (authData.getProvider().equals("password")) {
+                name = authData.getUid();
+            } else {
+                Log.e("Tag", "Invalid provider: " + authData.getProvider());
+            }
+            login.setVisibility(View.VISIBLE);
+            this.mAuthData = authData;
+        /* invalidate options menu to hide/show the logout button */
+            supportInvalidateOptionsMenu();
+        }
+    }
+
+    /**
+     * Utility class for authentication results
+     */
+    private class AuthResultHandler implements Firebase.AuthResultHandler {
+
+        private final String provider;
+
+        public AuthResultHandler(String provider) {
+            this.provider = provider;
+        }
+
+        @Override
+        public void onAuthenticated(AuthData authData) {
+            mAuthProgressDialog.hide();
+            Log.i("Tag", provider + " auth successful");
+            setAuthenticatedUser(authData);
+        }
+
+        @Override
+        public void onAuthenticationError(FirebaseError firebaseError) {
+            mAuthProgressDialog.hide();
+            showErrorDialog(firebaseError.toString());
+        }
+    }
+
+    /**
+     * Show errors to users
+     */
+    private void showErrorDialog(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     @Override
@@ -153,4 +244,6 @@ public class MainActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
+
 }
