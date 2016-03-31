@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     /* Listener for Firebase session changes */
     private Firebase.AuthStateListener mAuthStateListener;
 
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         if(username.contains("@"))
                         {
                             loginWithPassword(username, password);
-                            startActivity(new Intent(MainActivity.this, Selection.class));
+
                         }
                         else
                         {
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             if (authData.getProvider().equals("password")) {
                 name = authData.getUid();
             } else {
-                Log.e("Tag", "Invalid provider: " + authData.getProvider());
+                Log.e(TAG, "Invalid provider: " + authData.getProvider());
             }
             login.setVisibility(View.VISIBLE);
             this.mAuthData = authData;
@@ -161,8 +163,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onAuthenticated(AuthData authData) {
             mAuthProgressDialog.hide();
-            Log.i("Tag", provider + " auth successful");
+            Log.i(TAG, provider + " auth successful");
             setAuthenticatedUser(authData);
+            startActivity(new Intent(MainActivity.this, Selection.class));
         }
 
         @Override

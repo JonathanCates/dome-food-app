@@ -8,12 +8,15 @@ public class User
     private String firstName;
     private String lastName;
     private String email;
+    private String uid;
+    private final String provider = "password";
 
-    public User(String firstName, String lastName, String email)
+    public User(String firstName, String lastName, String email, String uid)
     {
         firstName = this.firstName;
         lastName = this.lastName;
         email = this.email;
+        uid = this.uid;
     }
 
     public String getFirstName()
@@ -24,6 +27,9 @@ public class User
 
     public String getEmail()
     {return email;}
+
+    public String getUid()
+    {return uid;}
 
     public void setFirstName(String firstName)
     {
@@ -39,4 +45,6 @@ public class User
     {
         email = this.email;
     }
+
+    public void setUid(String uid) {uid = this.uid;}
 }
