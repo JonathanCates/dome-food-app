@@ -24,6 +24,7 @@ public class ChosenVendor extends AppCompatActivity {
     private ArrayList<Food> shoppingCart;
     private ListView listView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
