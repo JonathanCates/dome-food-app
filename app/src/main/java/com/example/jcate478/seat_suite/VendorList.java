@@ -97,7 +97,7 @@ public class VendorList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Intent session = new Intent(VendorList.this, ChosenVendor.class);
+                Intent session = new Intent(getBaseContext(), ChosenVendor.class);
                 Vendor chosenVendor = vendors.get(position);
                 session.putExtra("chosenVendor", chosenVendor);
                 startActivity(session);

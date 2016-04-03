@@ -5,39 +5,33 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.jcate478.seat_suite.vendorInfo.User;
+import com.example.jcate478.seat_suite.vendorInfo.Vendor;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 import java.util.Map;
 
-public class Registration extends AppCompatActivity {
+public class VendorRegistration extends AppCompatActivity {
 
-    private String emailS;
-    private String password;
-    private String firstName;
-    private String lastName;
     private final Firebase firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/");
     private ProgressDialog mProgressDialog;
+    private String emailS;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-
-        TextView titleFont = (TextView) findViewById(R.id.seatSuite);
-        Typeface signPainter = Typeface.createFromAsset(getAssets(), "SignPainter-HouseScript.ttf");
-        titleFont.setTypeface(signPainter);
+        setContentView(R.layout.activity_vendor_registration);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Creating");
@@ -46,7 +40,7 @@ public class Registration extends AppCompatActivity {
         mProgressDialog.show();
         mProgressDialog.hide();
 
-        Button nextButt = (Button) findViewById(R.id.next);
+        Button nextButt = (Button) findViewById(R.id.vendorRegister);
 
         nextButt.setOnClickListener(
                 new View.OnClickListener(){
@@ -62,36 +56,23 @@ public class Registration extends AppCompatActivity {
     {
         mProgressDialog.show();
 
-        EditText first = (EditText) findViewById(R.id.firstName);
-        EditText last = (EditText) findViewById(R.id.lastName);
-        EditText email = (EditText) findViewById(R.id.email);
-        EditText pwrd = (EditText) findViewById(R.id.pword);
-        EditText pwrdCheck = (EditText) findViewById(R.id.pwordCheck);
-        firstName = first.getText().toString();
-        lastName = last.getText().toString();
+        EditText email = (EditText) findViewById(R.id.vendorEmail);
+        EditText pwrd = (EditText) findViewById(R.id.vendorPassword);
         emailS = email.getText().toString();
         password = pwrd.getText().toString();
-        String passwordCheck = pwrdCheck.getText().toString();
 
-        if(password.equals(passwordCheck))
-        {
-            firebaseRef.createUser(emailS, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
-                @Override
-                public void onSuccess(Map<String, Object> result) {
-                    addDetails();
-                    showDialog("Account created successfully", false);
-                }
+        firebaseRef.createUser(emailS, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+            @Override
+            public void onSuccess(Map<String, Object> result) {
+                addDetails();
+                showDialog("Account created successfully", false);
+            }
 
-                @Override
-                public void onError(FirebaseError firebaseError) {
-                    showDialog(firebaseError.toString(), true);
-                }
-            });
-        }
-        else
-        {
-            showDialog("Passwords are not the same, please ensure that they are the same.", true);
-        }
+            @Override
+            public void onError(FirebaseError firebaseError) {
+                   showDialog(firebaseError.toString(), true);
+            }
+        });
     }
 
     private void showDialog(String message, boolean error) {
@@ -135,17 +116,8 @@ public class Registration extends AppCompatActivity {
         @Override
         public void onAuthenticated(AuthData authData) {
 
-            User newUser = new User(firstName, lastName, emailS, authData.getUid());
-            firebaseRef.child("Users").child(authData.getUid()).setValue(newUser, new Firebase.CompletionListener() {
-                @Override
-                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                    if (firebaseError != null) {
-                        showDialog("Data could not be saved. " + firebaseError.getMessage(), true);
-                    } else {
-                        showDialog("Data saved successfully.", false);
-                    }
-                }
-            });
+            Vendor newVendor = new Vendor("Seat Suite Test Vendor", 204, authData.getUid());
+            firebaseRef.child("Vendors").setValue(newVendor);
         }
 
         @Override

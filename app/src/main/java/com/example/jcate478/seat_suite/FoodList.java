@@ -54,7 +54,7 @@ public class FoodList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent session = new Intent(FoodList.this, VendorList.class);
+                Intent session = new Intent(getBaseContext(), VendorList.class);
                 int foodType = itemTypes.get(position).getItemType();
                 session.putExtra("foodtype", foodType);
                 startActivity(session);

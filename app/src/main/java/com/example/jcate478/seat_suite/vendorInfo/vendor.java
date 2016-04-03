@@ -15,6 +15,7 @@ public class Vendor implements Parcelable{
     private ArrayList<Food> foodItems;
     private int closestSection;
     private ArrayList<Integer> vendorFoodTypes;
+    private String uID;
 
     public Vendor(String vendorName, int closestSection)
     {
@@ -22,6 +23,15 @@ public class Vendor implements Parcelable{
         this.closestSection = closestSection;
         foodItems = new ArrayList<>();
         vendorFoodTypes = new ArrayList<>();
+    }
+
+    public Vendor(String vendorName, int closestSection, String uID)
+    {
+        this.vendorName = vendorName;
+        this.closestSection = closestSection;
+        foodItems = new ArrayList<>();
+        vendorFoodTypes = new ArrayList<>();
+        this.uID = uID;
     }
 
     public String getVendorName()
@@ -37,6 +47,8 @@ public class Vendor implements Parcelable{
     }
 
     public ArrayList<Integer> getVendorFoodTypes() {return vendorFoodTypes;}
+
+    public String getuID() {return uID;}
 
     public void addFood(String name, int itemType, double price)
     {

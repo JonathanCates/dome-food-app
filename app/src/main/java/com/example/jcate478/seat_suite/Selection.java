@@ -1,5 +1,7 @@
 package com.example.jcate478.seat_suite;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,7 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.jcate478.seat_suite.vendorInfo.User;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 public class Selection extends AppCompatActivity {
+
+    private Firebase firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +35,16 @@ public class Selection extends AppCompatActivity {
         titleFont.setTypeface(signPainter);
         searchFont.setTypeface(signPainter);
 
+        showDialog(firebaseRef.getAuth().toString());
+
         buttons();
+    }
+
+    private void showDialog(String message) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Success")
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, null).show();
     }
 
     private void buttons()
@@ -37,21 +57,21 @@ public class Selection extends AppCompatActivity {
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        startActivity(new Intent(Selection.this, SectionSearch.class));
+                        startActivity(new Intent(getBaseContext(), SectionSearch.class));
                     }
                 });
         foodButt.setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        startActivity(new Intent(Selection.this, FoodList.class));
+                        startActivity(new Intent(getBaseContext(), FoodList.class));
                     }
                 });
         vendorButt.setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        startActivity(new Intent(Selection.this, VendorList.class));
+                        startActivity(new Intent(getBaseContext(), VendorList.class));
                     }
                 });
     }

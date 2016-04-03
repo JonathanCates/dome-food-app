@@ -15,9 +15,13 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.jcate478.seat_suite.vendorInfo.User;
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private Button login;
     private Button register;
+    private TextView vendorRegister;
     private GoogleApiClient client;
     private Firebase firebaseRef;
 
@@ -88,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     {
         login = (Button) findViewById(R.id.login_button);
         register = (Button) findViewById(R.id.register);
+        vendorRegister = (TextView) findViewById(R.id.vendorRegisterLink);
 
         login.setOnClickListener(
                 new View.OnClickListener()
@@ -101,14 +107,13 @@ public class MainActivity extends AppCompatActivity {
                         String username = user.getText().toString();
                         String password = pword.getText().toString();
 
-                        if(username.contains("@"))
+                        if(username.equals("seat.suite@gmail.com"))
                         {
-                            loginWithPassword(username, password);
-
+                            startActivity(new Intent(getBaseContext(), VendorDash.class));
                         }
                         else
                         {
-                            startActivity(new Intent(MainActivity.this, VendorDash.class));
+                            loginWithPassword(username, password);
                         }
 
                     }
@@ -120,7 +125,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v)
                     {
-                        startActivityForResult(new Intent(MainActivity.this, Registration.class), 1);
+                        startActivityForResult(new Intent(getBaseContext(), Registration.class), 1);
+                    }
+                });
+
+        vendorRegister.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        startActivityForResult(new Intent(getBaseContext(), VendorRegistration.class), 1);
                     }
                 });
     }
@@ -165,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             mAuthProgressDialog.hide();
             Log.i(TAG, provider + " auth successful");
             setAuthenticatedUser(authData);
-            startActivity(new Intent(MainActivity.this, Selection.class));
+            startActivity(new Intent(getBaseContext(), Selection.class));
         }
 
         @Override

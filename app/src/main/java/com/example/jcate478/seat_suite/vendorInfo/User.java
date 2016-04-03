@@ -47,4 +47,9 @@ public class User
     }
 
     public void setUid(String uid) {uid = this.uid;}
+
+    public String toString()
+    {
+        return "First name is: " + firstName + " Last Name is: " + lastName + " email is: " + email + " uID is: " + uid;
+    }
 }
