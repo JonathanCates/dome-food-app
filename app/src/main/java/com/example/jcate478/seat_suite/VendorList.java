@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.example.jcate478.seat_suite.customFunctionality.VendorListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.*;
+import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class VendorList extends AppCompatActivity {
     private ArrayAdapter<Vendor> arrayAdapter;
     private ArrayList<Vendor> vendorsHaveItemType;
     private int foodType;
+    private Firebase firebaseRef;
 
 
     @Override
@@ -32,6 +34,8 @@ public class VendorList extends AppCompatActivity {
 
         Intent i = getIntent();
         foodType = i.getIntExtra("foodtype", Food.DEFAULT_TYPE);
+
+        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/");
 
 
         vendors = new ArrayList<>();
@@ -85,6 +89,13 @@ public class VendorList extends AppCompatActivity {
         }
         else {
             arrayAdapter = new VendorListAdapter(VendorList.this, R.layout.child_lineview, vendors);
+        }
+
+        for(int i =0; i< vendors.size(); i++)
+        {
+            Firebase child = firebaseRef.child("Vendors").child(vendors.get(i).getVendorName());
+
+            child.setValue(vendors.get(i));
         }
 
         listView.setAdapter(arrayAdapter);

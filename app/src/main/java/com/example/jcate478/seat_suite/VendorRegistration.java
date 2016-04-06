@@ -116,8 +116,8 @@ public class VendorRegistration extends AppCompatActivity {
         @Override
         public void onAuthenticated(AuthData authData) {
 
-            Vendor newVendor = new Vendor("Seat Suite Test Vendor", 204, authData.getUid());
-            firebaseRef.child("Vendors").setValue(newVendor);
+            Firebase child = firebaseRef.child("Shitters").child("Test");
+            child.setValue(new Vendor("Jimmy's Hotdogs", 221, authData.getUid()));
         }
 
         @Override

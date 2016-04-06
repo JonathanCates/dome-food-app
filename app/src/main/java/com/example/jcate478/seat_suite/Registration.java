@@ -46,6 +46,8 @@ public class Registration extends AppCompatActivity {
         mProgressDialog.show();
         mProgressDialog.hide();
 
+
+
         Button nextButt = (Button) findViewById(R.id.next);
 
         nextButt.setOnClickListener(
@@ -128,24 +130,14 @@ public class Registration extends AppCompatActivity {
 
         private final String provider;
 
-        public AuthResultHandler(String provider) {
-            this.provider = provider;
-        }
+        public AuthResultHandler(String provider) {this.provider = provider;}
 
         @Override
         public void onAuthenticated(AuthData authData) {
 
-            User newUser = new User(firstName, lastName, emailS, authData.getUid());
-            firebaseRef.child("Users").child(authData.getUid()).setValue(newUser, new Firebase.CompletionListener() {
-                @Override
-                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                    if (firebaseError != null) {
-                        showDialog("Data could not be saved. " + firebaseError.getMessage(), true);
-                    } else {
-                        showDialog("Data saved successfully.", false);
-                    }
-                }
-            });
+            //User newUser = new User(firstName, lastName, emailS, authData.getUid());
+            Firebase child = firebaseRef.child("Consumers").child("Pool");
+            child.setValue(new User(firstName, lastName, emailS, authData.getUid()));
         }
 
         @Override
