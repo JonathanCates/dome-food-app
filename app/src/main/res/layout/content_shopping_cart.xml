@@ -48,6 +48,15 @@
             android:id="@+id/finalCost"
             android:paddingTop="40dp"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="See Cart"
+            android:id="@+id/checkout"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
+
     </LinearLayout>
 
 </RelativeLayout>

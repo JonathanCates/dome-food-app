@@ -122,22 +122,31 @@ public class Registration extends AppCompatActivity {
 
     private void addDetails()
     {
-        firebaseRef.authWithPassword(emailS, password, new AuthResultHandler("password"));
+        firebaseRef.authWithPassword(emailS, password, new AuthResultHandler("password", firstName, lastName, emailS));
     }
 
 
     private class AuthResultHandler implements Firebase.AuthResultHandler {
 
         private final String provider;
+        private String firstName;
+        private String lastName;
+        private String email;
 
-        public AuthResultHandler(String provider) {this.provider = provider;}
+        public AuthResultHandler(String provider, String firstName, String lastName, String email)
+        {
+            this.provider = provider;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+        }
 
         @Override
         public void onAuthenticated(AuthData authData) {
 
-            //User newUser = new User(firstName, lastName, emailS, authData.getUid());
-            Firebase child = firebaseRef.child("Consumers").child("Pool");
-            child.setValue(new User(firstName, lastName, emailS, authData.getUid()));
+            //User newUser = new User(firstName, lastName, email, authData.getUid());
+            Firebase child = firebaseRef.child("Consumers").child("TEST");
+            child.setValue(new User(firstName, lastName, email, authData.getUid()));
         }
 
         @Override

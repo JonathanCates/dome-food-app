@@ -1,15 +1,17 @@
 package com.example.jcate478.seat_suite.vendorInfo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Jonathan on 3/28/2016.
  */
-public class User
+public class User implements Parcelable
 {
     private String firstName;
     private String lastName;
     private String email;
     private String uid;
-    private final String provider = "password";
 
     public User(String firstName, String lastName, String email, String uid)
     {
@@ -48,8 +50,35 @@ public class User
 
     public void setUid(String uid) {uid = this.uid;}
 
-    public String toString()
-    {
-        return "First name is: " + firstName + " Last Name is: " + lastName + " email is: " + email + " uID is: " + uid;
+    private User(Parcel in) {
+        firstName = in.readString();
+        lastName = in.readString();
+        email = in.readString();
+        uid = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(email);
+        dest.writeString(uid);
     }
 }

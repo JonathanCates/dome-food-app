@@ -17,14 +17,6 @@ public class Vendor implements Parcelable{
     private ArrayList<Integer> vendorFoodTypes;
     private String uID;
 
-    public Vendor(String vendorName, int closestSection)
-    {
-        this.vendorName = vendorName;
-        this.closestSection = closestSection;
-        foodItems = new ArrayList<>();
-        vendorFoodTypes = new ArrayList<>();
-    }
-
     public Vendor(String vendorName, int closestSection, String uID)
     {
         this.vendorName = vendorName;
@@ -77,6 +69,7 @@ public class Vendor implements Parcelable{
         closestSection = in.readInt();
         foodItems = new ArrayList<>();
         in.readTypedList(foodItems, Food.CREATOR);
+        uID = in.readString();
     }
 
     @Override
@@ -93,5 +86,6 @@ public class Vendor implements Parcelable{
         out.writeString(vendorName);
         out.writeInt(closestSection);
         out.writeTypedList(foodItems);
+        out.writeString(uID);
     }
 }

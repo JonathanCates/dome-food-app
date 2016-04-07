@@ -52,7 +52,8 @@ public class ChosenVendor extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent session = new Intent(ChosenVendor.this, ShoppingCart.class);
+                        Intent session = new Intent(getBaseContext(), ShoppingCart.class);
+                        session.putExtra("vendorID", vendor.getuID());
                         session.putParcelableArrayListExtra("cart", shoppingCart);
                         startActivity(session);
                     }

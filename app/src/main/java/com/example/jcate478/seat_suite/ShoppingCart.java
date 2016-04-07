@@ -6,14 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.Food;
+import com.firebase.client.Firebase;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShoppingCart extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class ShoppingCart extends AppCompatActivity {
     private TextView gst;
     private TextView totalCost;
     private DecimalFormat df;
+    private String vendorID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,7 @@ public class ShoppingCart extends AppCompatActivity {
         Intent i = getIntent();
         foodCart = i.getParcelableArrayListExtra("cart");
         listView = (ListView)findViewById(R.id.shopping_cart);
+        vendorID = i.getStringExtra("vendorID");
 
         df = new DecimalFormat("#.##");
 
@@ -44,6 +50,7 @@ public class ShoppingCart extends AppCompatActivity {
 
         listShoppingCart();
         calculateCost();
+        buttons();
     }
 
     private void listShoppingCart()
@@ -54,6 +61,7 @@ public class ShoppingCart extends AppCompatActivity {
 
     private void calculateCost()
     {
+        price = 0;
         for (int i = 0; i < foodCart.size(); i++)
         {
             price += foodCart.get(i).getPrice();
@@ -64,8 +72,27 @@ public class ShoppingCart extends AppCompatActivity {
         totalCost.setText(df.format(price * 1.05));
     }
 
-    private void setClick()
+    private void buttons()
     {
+        Button checkout = (Button) findViewById(R.id.checkout);
+
+        checkout.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Firebase vendorRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Vendors").child(vendorID);
+
+                        String userID = vendorRef.getAuth().getUid();
+                        String orderName = userID + "'s order";
+                        vendorRef.child(orderName).setValue(foodCart);
+
+                        Intent session = new Intent(getBaseContext(), Checkout.class);
+                        session.putExtra("cost", price);
+                        startActivity(session);
+                    }
+                });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)

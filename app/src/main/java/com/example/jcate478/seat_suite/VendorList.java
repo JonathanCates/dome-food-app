@@ -50,11 +50,11 @@ public class VendorList extends AppCompatActivity {
      */
     private void populateVendors()
     {
-        vendors.add(new Vendor("Jimmy's Hot Dogs", 222));
-        vendors.add(new Vendor("Burgers, Burgers, Burgers", 231));
-        vendors.add(new Vendor("Just Food", 220));
-        vendors.add(new Vendor("BEER maybe", 184));
-        vendors.add(new Vendor("Churro Zone", 150));
+        vendors.add(new Vendor("Jimmy's Hot Dogs", 222, "i9hweriuthsduogi"));
+        vendors.add(new Vendor("Burgers, Burgers, Burgers", 231, "9yq3287054y3287hy"));
+        vendors.add(new Vendor("Just Food", 220, "87yq34287ghds"));
+        vendors.add(new Vendor("BEER maybe", 184, "9q3489ye8y934"));
+        vendors.add(new Vendor("Churro Zone", 150, "ght8y340y73tw87ht"));
 
         for(int i = 0; i < vendors.size(); i++)
         {
@@ -93,8 +93,7 @@ public class VendorList extends AppCompatActivity {
 
         for(int i =0; i< vendors.size(); i++)
         {
-            Firebase child = firebaseRef.child("Vendors").child(vendors.get(i).getVendorName());
-
+            Firebase child = firebaseRef.child("Vendors").child(vendors.get(i).getuID());
             child.setValue(vendors.get(i));
         }
 
