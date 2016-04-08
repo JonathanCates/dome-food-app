@@ -1,5 +1,7 @@
 package com.example.jcate478.seat_suite;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.Food;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -85,22 +88,51 @@ public class ShoppingCart extends AppCompatActivity {
 
                         String userID = vendorRef.getAuth().getUid();
                         String orderName = userID + "'s order";
-                        vendorRef.child(orderName).setValue(foodCart);
-
-                        Intent session = new Intent(getBaseContext(), Checkout.class);
-                        session.putExtra("cost", price);
-                        startActivity(session);
+                        vendorRef.child("Orders").child(orderName).setValue(foodCart, new Firebase.CompletionListener() {
+                            @Override
+                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                if (firebaseError != null) {
+                                    showDialog("Data could not be saved. " + firebaseError.getMessage(), true);
+                                } else {
+                                    showDialog("Data saved successfully.", false);
+                                }
+                            }
+                        });
                     }
                 });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 foodCart.remove(position);
                 listShoppingCart();
                 calculateCost();
             }
         });
+    }
+
+    private void showDialog(String message, boolean error) {
+        if(error) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+        }
+        else
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("Success")
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent session = new Intent(getBaseContext(), Checkout.class);
+                            session.putExtra("cost", price);
+                            startActivity(session);
+                        }
+                    })
+                    .show();
+        }
     }
 }

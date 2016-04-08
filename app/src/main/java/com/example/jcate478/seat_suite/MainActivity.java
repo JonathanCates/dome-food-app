@@ -15,13 +15,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.jcate478.seat_suite.vendorInfo.User;
 import com.firebase.client.AuthData;
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -167,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Utility class for authentication results
      */
-    private class AuthResultHandler implements Firebase.AuthResultHandler {
-
+    private class AuthResultHandler implements Firebase.AuthResultHandler
+    {
         private final String provider;
 
         public AuthResultHandler(String provider) {

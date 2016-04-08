@@ -8,23 +8,24 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.jcate478.seat_suite.R;
-import com.example.jcate478.seat_suite.vendorInfo.Food;
+import com.example.jcate478.seat_suite.vendorInfo.Order;
+import com.firebase.client.DataSnapshot;
 
 import java.util.ArrayList;
 
 /**
- * Created by jcate478 on 3/2/2016.
+ * Created by Jonathan on 08/04/2016.
  */
-public class FoodListAdapter extends ArrayAdapter<Food> {
+public class OrdersListAdapter extends ArrayAdapter<Order>{
 
-    private ArrayList<Food> foods;
+    private ArrayList<Order> orders;
     private Context context;
     private int layoutResourceId;
 
-    public FoodListAdapter(Context context, int layoutResourceId, ArrayList<Food> foods)
+    public OrdersListAdapter(Context context, int layoutResourceId, ArrayList<Order> orders)
     {
-        super(context, layoutResourceId, foods);
-        this.foods = foods;
+        super(context, layoutResourceId, orders);
+        this.orders = orders;
         this.context = context;
         this.layoutResourceId = layoutResourceId;
     }
@@ -40,8 +41,6 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView
                     .findViewById(R.id.childTextView);
-            viewHolder.text = (TextView) convertView
-                    .findViewById(R.id.priceTag);
             convertView.setTag(viewHolder);
         }
         else
@@ -49,9 +48,8 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Food temp = foods.get(position);
-        viewHolder.text.setText(temp.getName());
-        viewHolder.text.setText(temp.getPrice().toString());
+        Order temp = orders.get(position);
+        viewHolder.text.setText(temp.getOrderName());
 
         return convertView;
     }
