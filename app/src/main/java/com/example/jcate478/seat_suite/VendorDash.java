@@ -56,7 +56,7 @@ public class VendorDash extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
     }
 
-    private void showDialog(String message, boolean error) {
+    private void showDialog(String title, String message, boolean error) {
         if(error) {
             new AlertDialog.Builder(this)
                     .setTitle("Error")
@@ -67,7 +67,7 @@ public class VendorDash extends AppCompatActivity {
         else
         {
             new AlertDialog.Builder(this)
-                    .setTitle("Success")
+                    .setTitle(title)
                     .setMessage(message)
                     .setPositiveButton(android.R.string.ok, null)
                     .show();
@@ -81,7 +81,7 @@ public class VendorDash extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Order chosenOrder = (Order) arrayAdapter.getItem(position);
-                showDialog(chosenOrder.string(), false);
+                showDialog(chosenOrder.getOrderName(), chosenOrder.printOrder(), false);
             }
         });
     }

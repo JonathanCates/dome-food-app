@@ -47,7 +47,7 @@ public class ShoppingCart extends AppCompatActivity {
         //vendorID = i.getStringExtra("vendorID");
         vendorID = "1e54ba52-baa1-4609-bd24-e752c0bc337d";
 
-        df = new DecimalFormat("#.##");
+        df = new DecimalFormat("#.00");
 
         preGst = (TextView) findViewById(R.id.preTaxCost);
         gst = (TextView) findViewById(R.id.gst);
@@ -60,7 +60,7 @@ public class ShoppingCart extends AppCompatActivity {
 
     private void listShoppingCart()
     {
-        arrayAdapter = new FoodListAdapter(ShoppingCart.this, R.layout.child_lineview, foodCart);
+        arrayAdapter = new FoodListAdapter(ShoppingCart.this, R.layout.food_layout, foodCart);
         listView.setAdapter(arrayAdapter);
     }
 

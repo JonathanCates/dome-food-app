@@ -29,15 +29,15 @@ public class Order {
         return order;
     }
 
-    public String string()
+    public String printOrder()
     {
-        String toString = orderName + "\n";
+        String print = "";
 
         for(int i = 0; i < order.size(); i++)
         {
-            toString += order.get(i).getName() + "\n";
+            print += order.get(i).getName() + "\n";
         }
 
-        return toString;
+        return print;
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.jcate478.seat_suite.R;
 import com.example.jcate478.seat_suite.vendorInfo.Food;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,8 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
     private ArrayList<Food> foods;
     private Context context;
     private int layoutResourceId;
+    private DecimalFormat df;
+
 
     public FoodListAdapter(Context context, int layoutResourceId, ArrayList<Food> foods)
     {
@@ -27,6 +30,7 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
         this.foods = foods;
         this.context = context;
         this.layoutResourceId = layoutResourceId;
+        df = new DecimalFormat("#.00");
     }
 
     @Override
@@ -38,10 +42,8 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(layoutResourceId, null);
             viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView
-                    .findViewById(R.id.childTextView);
-            viewHolder.text = (TextView) convertView
-                    .findViewById(R.id.priceTag);
+            viewHolder.item = (TextView) convertView.findViewById(R.id.childTextView);
+            viewHolder.price = (TextView) convertView.findViewById(R.id.priceTag);
             convertView.setTag(viewHolder);
         }
         else
@@ -50,14 +52,15 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
         }
 
         Food temp = foods.get(position);
-        viewHolder.text.setText(temp.getName());
-        viewHolder.text.setText(temp.getPrice().toString());
+        viewHolder.item.setText(temp.getName());
+        viewHolder.price.setText(df.format(temp.getPrice()));
 
         return convertView;
     }
 
     public class ViewHolder {
-        TextView text;
+        TextView item;
+        TextView price;
     }
 
 }

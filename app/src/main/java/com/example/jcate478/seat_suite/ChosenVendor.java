@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.*;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ChosenVendor extends AppCompatActivity {
@@ -36,13 +37,14 @@ public class ChosenVendor extends AppCompatActivity {
         vendor = (Vendor) i.getParcelableExtra("chosenVendor");
         food = vendor.getFoodItems();
 
+
         listView = (ListView)findViewById(R.id.chosen_vendor_food);
         listFoodItems();
     }
 
     private void listFoodItems()
     {
-        arrayAdapter = new FoodListAdapter(ChosenVendor.this, R.layout.child_lineview, food);
+        arrayAdapter = new FoodListAdapter(ChosenVendor.this, R.layout.food_layout, food);
         listView.setAdapter(arrayAdapter);
 
         Button cartButt = (Button) findViewById(R.id.cart);
