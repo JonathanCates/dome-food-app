@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.Food;
+import com.example.jcate478.seat_suite.vendorInfo.Order;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
@@ -43,7 +44,8 @@ public class ShoppingCart extends AppCompatActivity {
         Intent i = getIntent();
         foodCart = i.getParcelableArrayListExtra("cart");
         listView = (ListView)findViewById(R.id.shopping_cart);
-        vendorID = i.getStringExtra("vendorID");
+        //vendorID = i.getStringExtra("vendorID");
+        vendorID = "1e54ba52-baa1-4609-bd24-e752c0bc337d";
 
         df = new DecimalFormat("#.##");
 
@@ -88,13 +90,14 @@ public class ShoppingCart extends AppCompatActivity {
 
                         String userID = vendorRef.getAuth().getUid();
                         String orderName = userID + "'s order";
-                        vendorRef.child("Orders").child(orderName).setValue(foodCart, new Firebase.CompletionListener() {
+                        Order newOrder = new Order(foodCart, orderName);
+                        vendorRef.child("Orders").child(orderName).setValue(newOrder, new Firebase.CompletionListener() {
                             @Override
                             public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                                 if (firebaseError != null) {
                                     showDialog("Data could not be saved. " + firebaseError.getMessage(), true);
                                 } else {
-                                    showDialog("Data saved successfully.", false);
+                                    showDialog("Order sent to chosen vendor.", false);
                                 }
                             }
                         });

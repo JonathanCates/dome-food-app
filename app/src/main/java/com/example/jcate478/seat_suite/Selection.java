@@ -35,16 +35,7 @@ public class Selection extends AppCompatActivity {
         titleFont.setTypeface(signPainter);
         searchFont.setTypeface(signPainter);
 
-        showDialog(firebaseRef.getAuth().toString());
-
         buttons();
-    }
-
-    private void showDialog(String message) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Success")
-                    .setMessage(message)
-                    .setPositiveButton(android.R.string.ok, null).show();
     }
 
     private void buttons()

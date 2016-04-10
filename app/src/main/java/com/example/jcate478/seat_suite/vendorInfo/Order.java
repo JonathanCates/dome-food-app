@@ -10,6 +10,9 @@ public class Order {
     private String orderName;
     private ArrayList<Food> order;
 
+    public Order()
+    {}
+
     public Order(ArrayList<Food> order, String orderName)
     {
         this.order = order;
@@ -24,5 +27,17 @@ public class Order {
     public ArrayList<Food> getOrder()
     {
         return order;
+    }
+
+    public String string()
+    {
+        String toString = orderName + "\n";
+
+        for(int i = 0; i < order.size(); i++)
+        {
+            toString += order.get(i).getName() + "\n";
+        }
+
+        return toString;
     }
 }

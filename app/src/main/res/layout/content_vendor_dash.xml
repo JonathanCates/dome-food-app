@@ -13,15 +13,6 @@
     tools:context="com.example.jcate478.seat_suite.VendorDash"
     tools:showIn="@layout/activity_vendor_dash">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Vendor Dash"
-        android:textSize="55dp"
-        android:id="@+id/seatSuite"
-        android:layout_marginBottom="34dp"
-        android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="wrap_content"

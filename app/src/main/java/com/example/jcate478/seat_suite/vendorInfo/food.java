@@ -23,6 +23,12 @@ public class Food implements Parcelable{
     public static int DEFAULT_TYPE = 99; // main placeholder to indicate that the foodlist was not the initial choice for a customer
 
     /**
+     * empty constructor for Firebase
+     */
+    public Food()
+    {}
+
+    /**
      * constructor specifically made to make a list of generic food types (burgers, popcorn etc) for the class FoodList
      * @param name name of food type
      * @param itemType int related to food type

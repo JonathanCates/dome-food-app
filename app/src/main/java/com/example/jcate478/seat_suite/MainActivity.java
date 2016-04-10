@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView vendorRegister;
     private GoogleApiClient client;
     private Firebase firebaseRef;
+    private String username;
 
     /* A dialog that is presented until the Firebase authentication finished. */
     private ProgressDialog mAuthProgressDialog;
@@ -100,18 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
                         EditText user = (EditText) findViewById(R.id.emailText);
                         EditText pword = (EditText) findViewById(R.id.password);
-                        String username = user.getText().toString();
+                        username = user.getText().toString();
                         String password = pword.getText().toString();
-
-                        if(username.equals("seat.suite@gmail.com"))
-                        {
-                            startActivity(new Intent(getBaseContext(), VendorDash.class));
-                        }
-                        else
-                        {
-                            loginWithPassword(username, password);
-                        }
-
+                        loginWithPassword(username, password);
                     }
                 });
 
@@ -176,13 +168,25 @@ public class MainActivity extends AppCompatActivity {
             mAuthProgressDialog.hide();
             Log.i(TAG, provider + " auth successful");
             setAuthenticatedUser(authData);
-            startActivity(new Intent(getBaseContext(), Selection.class));
+            activityChange();
         }
 
         @Override
         public void onAuthenticationError(FirebaseError firebaseError) {
             mAuthProgressDialog.hide();
             showErrorDialog(firebaseError.toString());
+        }
+    }
+
+    private void activityChange()
+    {
+        if(username.equals("seat.suite@gmail.com"))
+        {
+            startActivity(new Intent(getBaseContext(), VendorDash.class));
+        }
+        else
+        {
+            startActivity(new Intent(getBaseContext(), Selection.class));
         }
     }
 

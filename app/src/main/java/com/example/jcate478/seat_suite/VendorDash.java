@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -31,43 +33,27 @@ public class VendorDash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_dash);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/" + firebaseRef.getAuth().getUid());
+        Firebase.setAndroidContext(this);
+
+        firebaseRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Vendors");
+        firebaseRef = firebaseRef.child(firebaseRef.getAuth().getUid());
 
         pendingOrders = new ArrayList<Order>();
         listView = (ListView)findViewById(R.id.orders);
 
+
+
         populateOrderList();
+        setClick();
 
     }
 
     private void populateOrderList()
     {
         Firebase ordersRef = firebaseRef.child("Orders");
-
-
-        ordersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                showDialog("There are " + snapshot.getChildrenCount() + " orders", false);
-                for (DataSnapshot orderSnapshot : snapshot.getChildren()) {
-                    Order order = orderSnapshot.getValue(Order.class);
-                    pendingOrders.add(order);
-                    arrayAdapter = new OrdersListAdapter(VendorDash.this, R.layout.child_lineview, pendingOrders);
-                    listView.setAdapter(arrayAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                showDialog("There are no orders / nothing was read", true);
-            }
-        });
-
-
-
+        arrayAdapter = new OrdersListAdapter(ordersRef.limit(500), this, R.layout.printed_order);
+        listView.setAdapter(arrayAdapter);
     }
 
     private void showDialog(String message, boolean error) {
@@ -86,5 +72,17 @@ public class VendorDash extends AppCompatActivity {
                     .setPositiveButton(android.R.string.ok, null)
                     .show();
         }
+    }
+
+    private void setClick()
+    {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Order chosenOrder = (Order) arrayAdapter.getItem(position);
+                showDialog(chosenOrder.string(), false);
+            }
+        });
     }
 }

@@ -1,36 +1,26 @@
 package com.example.jcate478.seat_suite.customFunctionality;
 
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.app.Activity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.jcate478.seat_suite.R;
 import com.example.jcate478.seat_suite.vendorInfo.Order;
-import com.firebase.client.DataSnapshot;
-
-import java.util.ArrayList;
+import com.firebase.client.Query;
 
 /**
  * Created by Jonathan on 08/04/2016.
  */
-public class OrdersListAdapter extends ArrayAdapter<Order>{
+public class OrdersListAdapter extends FirebaseListAdapter<Order>{
 
-    private ArrayList<Order> orders;
-    private Context context;
-    private int layoutResourceId;
 
-    public OrdersListAdapter(Context context, int layoutResourceId, ArrayList<Order> orders)
+    public OrdersListAdapter(Query ref, Activity activity, int layoutResourceId)
     {
-        super(context, layoutResourceId, orders);
-        this.orders = orders;
-        this.context = context;
-        this.layoutResourceId = layoutResourceId;
+        super(ref, Order.class, layoutResourceId, activity);
     }
 
-    @Override
+    /*@Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
@@ -52,10 +42,18 @@ public class OrdersListAdapter extends ArrayAdapter<Order>{
         viewHolder.text.setText(temp.getOrderName());
 
         return convertView;
+    }*/
+
+    @Override
+    protected void populateView(View v, Order newOrder)
+    {
+        String name = newOrder.getOrderName();
+        TextView orderNameText = (TextView) v.findViewById(R.id.orderName);
+        orderNameText.setText(name);
     }
 
-    public class ViewHolder {
+    /*(public class ViewHolder {
         TextView text;
-    }
+    }*/
 
 }
