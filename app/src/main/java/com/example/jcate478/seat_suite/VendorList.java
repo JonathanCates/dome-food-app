@@ -60,15 +60,15 @@ public class VendorList extends AppCompatActivity {
         {
             if(i <= 2)
             {
-            vendors.get(i).addFood("Chicken Fingers " + i, Food.CHICKEN_FINGERS_TYPE, 20.00);
-            vendors.get(i).addFood("Burger " + i, Food.BURGER_TYPE, 18.21);
-            vendors.get(i).addFood("Churro " + i, Food.CHURRO_TYPE, 9.99);
+            vendors.get(i).addFood("Chicken Fingers", Food.CHICKEN_FINGERS_TYPE, 20.00);
+            vendors.get(i).addFood("Burger", Food.BURGER_TYPE, 18.21);
+            vendors.get(i).addFood("Churro", Food.CHURRO_TYPE, 9.99);
             }
-            vendors.get(i).addFood("Snacks " + i, Food.SNACKS_TYPE, 14.68);
+            vendors.get(i).addFood("Snacks", Food.SNACKS_TYPE, 14.68);
             if(i > 2)
             {
-            vendors.get(i).addFood("Beer " + i, Food.BEER_TYPE, 6.67);
-            vendors.get(i).addFood("Hot Dog " + i, Food.HOT_DOG_TYPE, 3.28);
+            vendors.get(i).addFood("Beer", Food.BEER_TYPE, 6.67);
+            vendors.get(i).addFood("Hot Dog", Food.HOT_DOG_TYPE, 3.28);
             }
         }
 

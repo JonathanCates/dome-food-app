@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.jcate478.seat_suite.customFunctionality.FoodListAdapter;
+import com.example.jcate478.seat_suite.customFunctionality.VendorListAdapter;
 import com.example.jcate478.seat_suite.vendorInfo.Food;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class FoodList extends AppCompatActivity {
         itemTypes.add(new Food("Hot Dog", Food.HOT_DOG_TYPE));
 
 
-        listAdapter = new FoodListAdapter(FoodList.this, R.layout.child_lineview, itemTypes);
+        listAdapter = new FoodListAdapter(FoodList.this, R.layout.food_layout, itemTypes);
         listViewOfItemTypes.setAdapter(listAdapter);
 
     }

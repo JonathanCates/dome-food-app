@@ -34,18 +34,21 @@ public class ShoppingCart extends AppCompatActivity {
     private TextView gst;
     private TextView totalCost;
     private DecimalFormat df;
-    private String vendorID;
+    private String vendorName; //will find by vendor id in the end, name is passed for now
+    private String testVendorID; // links to table that seat.suite@gmail.com accesses
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
+        Firebase.setAndroidContext(this);
+
         Intent i = getIntent();
         foodCart = i.getParcelableArrayListExtra("cart");
         listView = (ListView)findViewById(R.id.shopping_cart);
-        //vendorID = i.getStringExtra("vendorID");
-        vendorID = "1e54ba52-baa1-4609-bd24-e752c0bc337d";
+        vendorName = i.getStringExtra("vendorName");
+        testVendorID = "1e54ba52-baa1-4609-bd24-e752c0bc337d";
 
         df = new DecimalFormat("#.00");
 
@@ -86,11 +89,14 @@ public class ShoppingCart extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        Firebase vendorRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Vendors").child(vendorID);
+                        Firebase vendorRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Vendors").child(testVendorID);
 
                         String userID = vendorRef.getAuth().getUid();
+                        String userEmail = (String) vendorRef.getAuth().getProviderData().get("email");
                         String orderName = userID + "'s order";
-                        Order newOrder = new Order(foodCart, orderName);
+
+                        Order newOrder = new Order(foodCart, orderName, userID, userEmail, vendorName);
+
                         vendorRef.child("Orders").child(orderName).setValue(newOrder, new Firebase.CompletionListener() {
                             @Override
                             public void onComplete(FirebaseError firebaseError, Firebase firebase) {

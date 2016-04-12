@@ -53,7 +53,9 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
 
         Food temp = foods.get(position);
         viewHolder.item.setText(temp.getName());
-        viewHolder.price.setText(df.format(temp.getPrice()));
+        if(temp.getPrice() != null) {
+            viewHolder.price.setText(df.format(temp.getPrice()));
+        }
 
         return convertView;
     }
