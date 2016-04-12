@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#689696"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.jcate478.seat_suite.ChosenSection"
+    tools:showIn="@layout/activity_chosen_section">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="Vendors Outside Your Exit"
+        android:id="@+id/textView1" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/vendor_in_group">
+    </ListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Vendors Outside Your Next Nearest Exits"
+            android:id="@+id/textView2" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/vendor_in_closest_group_left" >
+    </ListView>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/vendor_in_closest_group_right" >
+</ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="Vendors A Couple Of Exits Away" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/vendor_in_second_closest_group_left" >
+    </ListView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/vendor_in_second_closest_group_right" >
+</ListView>
+</LinearLayout>

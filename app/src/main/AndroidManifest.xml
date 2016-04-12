@@ -72,6 +72,10 @@
             android:name=".VendorRegistration"
             android:label="@string/title_activity_vendor_registration"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ChosenSection"
+            android:label="@string/title_activity_chosen_section"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -50,11 +50,11 @@ public class VendorList extends AppCompatActivity {
      */
     private void populateVendors()
     {
-        vendors.add(new Vendor("Jimmy's Hot Dogs", 222, "i9hweriuthsduogi"));
-        vendors.add(new Vendor("Burgers, Burgers, Burgers", 231, "9yq3287054y3287hy"));
-        vendors.add(new Vendor("Just Food", 220, "87yq34287ghds"));
-        vendors.add(new Vendor("BEER maybe", 184, "9q3489ye8y934"));
-        vendors.add(new Vendor("Churro Zone", 150, "ght8y340y73tw87ht"));
+        vendors.add(new Vendor("Jimmy's Hot Dogs", 215, "i9hweriuthsduogi"));
+        vendors.add(new Vendor("Burgers, Burgers, Burgers", 213, "9yq3287054y3287hy"));
+        vendors.add(new Vendor("Just Food", 210, "87yq34287ghds"));
+        vendors.add(new Vendor("BEER maybe", 224, "9q3489ye8y934"));
+        vendors.add(new Vendor("Churro Zone", 226, "ght8y340y73tw87ht"));
 
         for(int i = 0; i < vendors.size(); i++)
         {
