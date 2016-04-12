@@ -21,24 +21,12 @@ import java.util.List;
 public class ChosenSection extends AppCompatActivity {
 
     private saddledomeGrid grid = new saddledomeGrid();
-    private ArrayAdapter<Vendor> arrayAdapter1;
-    private ArrayAdapter<Vendor> arrayAdapter2;
-    private ArrayAdapter<Vendor> arrayAdapter3;
-    private ArrayAdapter<Vendor> arrayAdapter4;
-    private ArrayAdapter<Vendor> arrayAdapter5;
-    private ArrayList<Vendor> vendors;
+    private ArrayAdapter<Vendor> arrayAdapter;
+    private ArrayList<Vendor> unOrderedVendors;
 
     private ListView listViewGroup;
-    private ListView listViewLeftGroup;
-    private ListView listViewRightGroup;
-    private ListView listView2ndLeftGroup;
-    private ListView listView2ndRightGroup;
 
-    private ArrayList<Vendor> inGroup;
-    private ArrayList<Vendor> nextLeft;
-    private ArrayList<Vendor> nextRight;
-    private ArrayList<Vendor> nextTwoLeft;
-    private ArrayList<Vendor> nextTwoRight;
+    private ArrayList<Vendor> orderedVendors;
 
 
 
@@ -49,26 +37,22 @@ public class ChosenSection extends AppCompatActivity {
         setContentView(R.layout.activity_chosen_section);
 
         listViewGroup = (ListView)findViewById(R.id.vendor_in_group);
-        listViewLeftGroup = (ListView)findViewById(R.id.vendor_in_closest_group_left);
-        listViewRightGroup = (ListView)findViewById(R.id.vendor_in_closest_group_right);
-        listView2ndLeftGroup = (ListView)findViewById(R.id.vendor_in_second_closest_group_left);
-        listView2ndRightGroup = (ListView)findViewById(R.id.vendor_in_second_closest_group_right);
 
         Intent i = getIntent();
-        int chosenSection = i.getIntExtra("chosenSection",0);
-        vendors = i.getParcelableArrayListExtra("vendors");
+        int chosenSection = i.getIntExtra("chosenSection", 0);
+        unOrderedVendors = i.getParcelableArrayListExtra("vendors");
 
         grid.populateGrid();
+
+        orderedVendors = new ArrayList<>();
 
         listVendorsInGroup(chosenSection);
         listVendorsInClosetGroup(chosenSection);
         listVendorsInSecondClosestGroup(chosenSection);
 
-        listViewGroup.setAdapter(arrayAdapter1);
-        listViewLeftGroup.setAdapter(arrayAdapter2);
-        listViewRightGroup.setAdapter(arrayAdapter3);
-        listView2ndLeftGroup.setAdapter(arrayAdapter4);
-        listView2ndRightGroup.setAdapter(arrayAdapter5);
+
+        arrayAdapter = new VendorListAdapter(ChosenSection.this, R.layout.child_lineview, orderedVendors);
+        listViewGroup.setAdapter(arrayAdapter);
 
     }
 
@@ -97,9 +81,9 @@ public class ChosenSection extends AppCompatActivity {
     public Vendor getVendorInSection(int section)
     {
 
-        for(int i = 0; i < vendors.size(); i++)
+        for(int i = 0; i < unOrderedVendors.size(); i++)
         {
-            Vendor thisOne = vendors.get(i);
+            Vendor thisOne = unOrderedVendors.get(i);
             if(thisOne.getClosestSection()==section)
             {
                 return thisOne;
@@ -114,13 +98,7 @@ public class ChosenSection extends AppCompatActivity {
     {
         int group = grid.searchGrid(section);
 
-        inGroup = getVendorsByGroup(group);
-
-        arrayAdapter1 = new VendorListAdapter(getBaseContext(), R.layout.child_lineview, inGroup);
-        //listViewGroup.setAdapter(arrayAdapter);
-
-
-
+        orderedVendors = getVendorsByGroup(group);
     }
 
     public void listVendorsInClosetGroup(int section)
@@ -145,15 +123,39 @@ public class ChosenSection extends AppCompatActivity {
             groupRight=group+1;
         }
 
-        nextLeft = getVendorsByGroup(groupLeft);
-        nextRight = getVendorsByGroup(groupRight);
+        orderedVendors.addAll(getVendorsByGroup(groupLeft));
+        orderedVendors.addAll(getVendorsByGroup(groupRight));
 
-        arrayAdapter2 = new VendorListAdapter(getBaseContext(), R.layout.child_lineview, nextLeft);
-        //listViewLeftGroup.setAdapter(arrayAdapter);
 
-        arrayAdapter3 = new VendorListAdapter(getBaseContext(), R.layout.child_lineview, nextRight);
-        //listViewRightGroup.setAdapter(arrayAdapter);
     }
+
+    /*public void listVendorsInClosetGroup(int section)
+    {
+        int group = grid.searchGrid(section);
+        int groupLeft;
+        int groupRight;
+
+        if(group==0)
+        {
+            groupLeft = 10;
+            groupRight = 1;
+        }
+        else if(group==11)
+        {
+            groupLeft=10;
+            groupRight=0;
+        }
+        else
+        {
+            groupLeft=group-1;
+            groupRight=group+1;
+        }
+
+        orderedVendors.addAll(getVendorsByGroup(groupLeft));
+        orderedVendors.addAll(getVendorsByGroup(groupRight));
+
+
+    }*/
 
     public void listVendorsInSecondClosestGroup(int section)
     {
@@ -190,15 +192,8 @@ public class ChosenSection extends AppCompatActivity {
             groupTwoRight=group+2;
         }
 
-        nextTwoLeft = getVendorsByGroup(groupTwoLeft);
-        nextTwoRight = getVendorsByGroup(groupTwoRight);
-
-        arrayAdapter4 = new VendorListAdapter(getBaseContext(), R.layout.child_lineview, nextTwoLeft);
-        //listView2ndLeftGroup.setAdapter(arrayAdapter);
-
-        arrayAdapter5 = new VendorListAdapter(getBaseContext(), R.layout.child_lineview, nextTwoRight);
-        //listView2ndRightGroup.setAdapter(arrayAdapter);
-
+        orderedVendors.addAll(getVendorsByGroup(groupTwoLeft));
+        orderedVendors.addAll(getVendorsByGroup(groupTwoRight));
     }
 
 }
