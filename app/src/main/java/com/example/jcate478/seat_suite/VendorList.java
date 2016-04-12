@@ -46,11 +46,11 @@ public class VendorList extends AppCompatActivity {
      */
     private void populateVendors()
     {
-        vendors.add(new Vendor("Jimmy's Hot Dogs", 222));
-        vendors.add(new Vendor("Burgers, Burgers, Burgers", 231));
-        vendors.add(new Vendor("Just Food", 220));
-        vendors.add(new Vendor("BEER maybe", 184));
-        vendors.add(new Vendor("Churro Zone", 150));
+        vendors.add(new Vendor("Jimmy's Hot Dogs", 215));
+        vendors.add(new Vendor("Burgers, Burgers, Burgers", 213));
+        vendors.add(new Vendor("Just Food", 210));
+        vendors.add(new Vendor("BEER maybe", 224));
+        vendors.add(new Vendor("Churro Zone", 226));
 
         for(int i = 0; i < vendors.size(); i++)
         {
@@ -90,6 +90,7 @@ public class VendorList extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
     }
+
 
     private void setClick()
     {
