@@ -15,7 +15,7 @@
         android:layout_weight="0"
         android:id="@+id/chosen_vendor_food" />
 
-    <LinearLayout android:layout_width="fill_parent"
+    <LinearLayout android:layout_width="335dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -23,13 +23,15 @@
         android:id="@+id/linearLayout">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="335dp"
             android:layout_height="wrap_content"
             android:text="See Cart"
             android:id="@+id/cart"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:background="@drawable/dark_rectangle_button"
+            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 

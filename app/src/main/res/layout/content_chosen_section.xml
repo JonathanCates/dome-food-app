@@ -10,62 +10,11 @@
     tools:context="com.example.jcate478.seat_suite.ChosenSection"
     tools:showIn="@layout/activity_chosen_section">
 
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:text="Vendors Outside Your Exit"
-        android:id="@+id/textView1" />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:id="@+id/vendor_in_group" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:text="Vendors Outside Your Next Nearest Exits"
-        android:id="@+id/textView2" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:id="@+id/vendor_in_closest_group_left" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:id="@+id/vendor_in_closest_group_right" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:text="Vendors A Couple Of Exits Away" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:id="@+id/vendor_in_second_closest_group_left" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:id="@+id/vendor_in_second_closest_group_right" /> -->
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="0"
-        android:id="@+id/vendor_in_group" />
+        android:id="@+id/vendor_in_group"
+        android:divider="#f52887" />
 
 </LinearLayout>

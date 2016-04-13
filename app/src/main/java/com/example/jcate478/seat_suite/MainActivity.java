@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
     {
         login = (Button) findViewById(R.id.login_button);
         register = (Button) findViewById(R.id.register);
-        vendorRegister = (TextView) findViewById(R.id.vendorRegisterLink);
 
         login.setOnClickListener(
                 new View.OnClickListener()
@@ -98,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v)
                     {
-
                         EditText user = (EditText) findViewById(R.id.emailText);
                         EditText pword = (EditText) findViewById(R.id.password);
                         username = user.getText().toString();
@@ -114,16 +112,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v)
                     {
                         startActivityForResult(new Intent(getBaseContext(), Registration.class), 1);
-                    }
-                });
-
-        vendorRegister.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        startActivityForResult(new Intent(getBaseContext(), VendorRegistration.class), 1);
                     }
                 });
     }

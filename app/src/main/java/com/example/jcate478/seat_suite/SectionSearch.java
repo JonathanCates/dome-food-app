@@ -29,8 +29,10 @@ public class SectionSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_section_search);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        TextView titleFont = (TextView) findViewById(R.id.seatSuite);
+        Typeface signPainter = Typeface.createFromAsset(getAssets(), "SignPainter-HouseScript.ttf");
+        titleFont.setTypeface(signPainter);
 
         vendors = new ArrayList<>();
         grid = new saddledomeGrid();
@@ -80,33 +82,36 @@ public class SectionSearch extends AppCompatActivity {
     private void search()
     {
         EditText searchText = (EditText) findViewById(R.id.sectionText);
-        boolean notfound = false;
-        int chosenSection = Integer.parseInt(searchText.getText().toString());
-        int checkFor = grid.searchGrid(chosenSection);
-        if(checkFor > -1)
-        {
-            int[] groupOfSections = grid.getGroup(checkFor);
-
-            for(int searchArray = 0; searchArray < groupOfSections.length; searchArray++) {
-                int findThis = groupOfSections[searchArray];
-
-                for (int searchSection = 0; searchSection < vendors.size(); searchSection++) {
-                    if (findThis == vendors.get(searchSection).getClosestSection()) {
-                        notfound = false;
-                        Intent intent = new Intent(getBaseContext(), ChosenSection.class);
-                        intent.putExtra("chosenSection", chosenSection);
-                        intent.putParcelableArrayListExtra("vendors", vendors);
-                        startActivity(intent);
-                    }
-                }
-                if (notfound == true) {
-                    showErrorDialog("Section Not found");
-                }
-            }
+        if(searchText.getText().toString().equals("")) {
+            showErrorDialog("Please enter a value");
         }
         else
         {
-            showErrorDialog("Section does not exist in system");
+            boolean notfound = false;
+            int chosenSection = Integer.parseInt(searchText.getText().toString());
+            int checkFor = grid.searchGrid(chosenSection);
+            if (checkFor > -1) {
+                int[] groupOfSections = grid.getGroup(checkFor);
+
+                for (int searchArray = 0; searchArray < groupOfSections.length; searchArray++) {
+                    int findThis = groupOfSections[searchArray];
+
+                    for (int searchSection = 0; searchSection < vendors.size(); searchSection++) {
+                        if (findThis == vendors.get(searchSection).getClosestSection()) {
+                            notfound = false;
+                            Intent intent = new Intent(getBaseContext(), ChosenSection.class);
+                            intent.putExtra("chosenSection", chosenSection);
+                            intent.putParcelableArrayListExtra("vendors", vendors);
+                            startActivity(intent);
+                        }
+                    }
+                    if (notfound == true) {
+                        showErrorDialog("Section Not found");
+                    }
+                }
+            } else {
+                showErrorDialog("Section does not exist in system");
+            }
         }
     }
 

@@ -8,13 +8,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#689696"
-    tools:context="com.example.jcate478.seat_suite.VendorList">
+    tools:context="com.example.jcate478.seat_suite.VendorList"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/childTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:listSelector="#ffffff"/>
+        android:layout_height="40dp"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/light_rectangle_button"
+        android:gravity="center"/>
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.jcate478.seat_suite.customFunctionality;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,9 @@ public class FoodListAdapter extends ArrayAdapter<Food> {
         Food temp = foods.get(position);
         viewHolder.item.setText(temp.getName());
         if(temp.getPrice() != null) {
-            viewHolder.price.setText(df.format(temp.getPrice()));
+            viewHolder.price.setText("$" + df.format(temp.getPrice()));
         }
+        viewHolder.item.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
         return convertView;
     }

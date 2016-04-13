@@ -75,9 +75,9 @@ public class ShoppingCart extends AppCompatActivity {
             price += foodCart.get(i).getPrice();
         }
 
-        preGst.setText(df.format(price));
-        gst.setText(df.format(price * 0.05)); // Canadian GST is 5%, Alberta has no PST so not added in hardcode, will change if expanded outside AB
-        totalCost.setText(df.format(price * 1.05));
+        preGst.setText("Before Tax: $" + df.format(price));
+        gst.setText("Tax: $" + df.format(price * 0.05)); // Canadian GST is 5%, Alberta has no PST so not added in hardcode, will change if expanded outside AB
+        totalCost.setText("Total: $" + df.format(price * 1.05));
     }
 
     private void buttons()
@@ -88,25 +88,30 @@ public class ShoppingCart extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(hasItemsInCart()) {
+                            Firebase vendorRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Vendors").child(testVendorID);
 
-                        Firebase vendorRef = new Firebase("https://glowing-inferno-5513.firebaseio.com/Vendors").child(testVendorID);
+                            String userID = vendorRef.getAuth().getUid();
+                            String userEmail = (String) vendorRef.getAuth().getProviderData().get("email");
+                            String orderName = userID + "'s order";
 
-                        String userID = vendorRef.getAuth().getUid();
-                        String userEmail = (String) vendorRef.getAuth().getProviderData().get("email");
-                        String orderName = userID + "'s order";
+                            Order newOrder = new Order(foodCart, orderName, userID, userEmail, vendorName);
 
-                        Order newOrder = new Order(foodCart, orderName, userID, userEmail, vendorName);
-
-                        vendorRef.child("Orders").child(orderName).setValue(newOrder, new Firebase.CompletionListener() {
-                            @Override
-                            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                                if (firebaseError != null) {
-                                    showDialog("Data could not be saved. " + firebaseError.getMessage(), true);
-                                } else {
-                                    showDialog("Order sent to chosen vendor.", false);
+                            vendorRef.child("Orders").child(orderName).setValue(newOrder, new Firebase.CompletionListener() {
+                                @Override
+                                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                                    if (firebaseError != null) {
+                                        showDialog("Data could not be saved. " + firebaseError.getMessage(), true);
+                                    } else {
+                                        showDialog("Order sent to chosen vendor.", false);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+                        else
+                        {
+                            showDialog("Cart has nothing in it!", true);
+                        }
                     }
                 });
 
@@ -143,5 +148,16 @@ public class ShoppingCart extends AppCompatActivity {
                     })
                     .show();
         }
+    }
+    private boolean hasItemsInCart() {
+        boolean cartHas;
+        if(foodCart.size() != 0) {
+            cartHas = true;
+        }
+        else
+        {
+            cartHas = false;
+        }
+        return cartHas;
     }
 }

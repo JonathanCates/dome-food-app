@@ -77,7 +77,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -85,6 +85,6 @@
         android:id="@+id/vendorRegisterLink"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textColor="#D2E7ED" />
+        android:textColor="#D2E7ED" /> -->
 
 </RelativeLayout>

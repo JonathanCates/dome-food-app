@@ -20,29 +20,6 @@ public class OrdersListAdapter extends FirebaseListAdapter<Order>{
         super(ref, Order.class, layoutResourceId, activity);
     }
 
-    /*@Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-
-        if (convertView == null)
-        {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(layoutResourceId, null);
-            viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView
-                    .findViewById(R.id.childTextView);
-            convertView.setTag(viewHolder);
-        }
-        else
-        {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-
-        Order temp = orders.get(position);
-        viewHolder.text.setText(temp.getOrderName());
-
-        return convertView;
-    }*/
 
     @Override
     protected void populateView(View v, Order newOrder)
@@ -51,9 +28,4 @@ public class OrdersListAdapter extends FirebaseListAdapter<Order>{
         TextView orderNameText = (TextView) v.findViewById(R.id.orderName);
         orderNameText.setText(name);
     }
-
-    /*(public class ViewHolder {
-        TextView text;
-    }*/
-
 }

@@ -37,7 +37,6 @@ public class ChosenVendor extends AppCompatActivity {
         vendor = (Vendor) i.getParcelableExtra("chosenVendor");
         food = vendor.getFoodItems();
 
-
         listView = (ListView)findViewById(R.id.chosen_vendor_food);
         listFoodItems();
     }
