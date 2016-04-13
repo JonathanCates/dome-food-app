@@ -61,6 +61,7 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:id="@+id/vendor_in_second_closest_group_right" /> -->
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"

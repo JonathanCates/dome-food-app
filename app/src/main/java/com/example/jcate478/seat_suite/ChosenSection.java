@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ChosenSection extends AppCompatActivity {
 
-    private saddledomeGrid grid = new saddledomeGrid();
+    private saddledomeGrid grid;
     private ArrayAdapter<Vendor> arrayAdapter;
     private ArrayList<Vendor> unOrderedVendors;
 
@@ -42,17 +42,17 @@ public class ChosenSection extends AppCompatActivity {
         int chosenSection = i.getIntExtra("chosenSection", 0);
         unOrderedVendors = i.getParcelableArrayListExtra("vendors");
 
-        grid.populateGrid();
+        grid = new saddledomeGrid();
 
         orderedVendors = new ArrayList<>();
 
         listVendorsInGroup(chosenSection);
         listVendorsInClosetGroup(chosenSection);
-        listVendorsInSecondClosestGroup(chosenSection);
-
 
         arrayAdapter = new VendorListAdapter(ChosenSection.this, R.layout.child_lineview, orderedVendors);
         listViewGroup.setAdapter(arrayAdapter);
+
+        setClick();
 
     }
 
@@ -101,34 +101,6 @@ public class ChosenSection extends AppCompatActivity {
         orderedVendors = getVendorsByGroup(group);
     }
 
-    public void listVendorsInClosetGroup(int section)
-    {
-        int group = grid.searchGrid(section);
-        int groupLeft;
-        int groupRight;
-
-        if(group==0)
-        {
-            groupLeft = 10;
-            groupRight = 1;
-        }
-        else if(group==11)
-        {
-            groupLeft=10;
-            groupRight=0;
-        }
-        else
-        {
-            groupLeft=group-1;
-            groupRight=group+1;
-        }
-
-        orderedVendors.addAll(getVendorsByGroup(groupLeft));
-        orderedVendors.addAll(getVendorsByGroup(groupRight));
-
-
-    }
-
     /*public void listVendorsInClosetGroup(int section)
     {
         int group = grid.searchGrid(section);
@@ -157,7 +129,69 @@ public class ChosenSection extends AppCompatActivity {
 
     }*/
 
-    public void listVendorsInSecondClosestGroup(int section)
+    public void listVendorsInClosetGroup(int section)
+    {
+        int group = grid.searchGrid(section);
+        int groupLeft;
+        int groupRight;
+
+        if(group==0)
+        {
+            groupLeft = 10;
+            groupRight = 1;
+        }
+        else if(group==11)
+        {
+            groupLeft=10;
+            groupRight=0;
+        }
+        else{
+            groupLeft = group - 1;
+            groupRight = group + 1;
+        }
+
+
+        if(getVendorsByGroup(groupRight).size() != 0)
+        {
+            orderedVendors.addAll(getVendorsByGroup(groupRight));
+        }
+        if(getVendorsByGroup(groupLeft).size() != 0)
+        {
+            orderedVendors.addAll(getVendorsByGroup(groupLeft));
+        }
+
+        for(int i = 1; i < grid.getGrid().size()/2 ; i++)
+        {
+            if(groupLeft == 0)
+            {
+                groupLeft = 10;
+                groupRight += 1;
+            }
+            else if(groupRight == 10)
+            {
+                groupLeft -= 1;
+                groupRight = 0;
+            }
+            else
+            {
+                groupLeft -= 1;
+                groupRight += 1;
+            }
+
+            if(getVendorsByGroup(groupRight).size() != 0)
+            {
+                orderedVendors.addAll(getVendorsByGroup(groupRight));
+            }
+            if(getVendorsByGroup(groupLeft).size() != 0)
+            {
+                orderedVendors.addAll(getVendorsByGroup(groupLeft));
+            }
+
+        }
+
+    }
+
+    /*public void listVendorsInSecondClosestGroup(int section)
     {
         int group = grid.searchGrid(section);
         int groupTwoLeft;
@@ -194,6 +228,19 @@ public class ChosenSection extends AppCompatActivity {
 
         orderedVendors.addAll(getVendorsByGroup(groupTwoLeft));
         orderedVendors.addAll(getVendorsByGroup(groupTwoRight));
+    }*/
+
+    private void setClick()
+    {
+        listViewGroup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent session = new Intent(getBaseContext(), ChosenVendor.class);
+                Vendor chosenVendor = orderedVendors.get(position);
+                session.putExtra("chosenVendor", chosenVendor);
+                startActivity(session);
+            }
+        });
     }
 
 }

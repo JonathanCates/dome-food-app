@@ -24,8 +24,13 @@ public class saddledomeGrid {
     int[] group9 = new int[] {117,116};
     int[] group10 = new int[] {115,114,113};
 
+    public saddledomeGrid()
+    {
+        populateGrid();
+    }
 
-    public void populateGrid()
+
+    private void populateGrid()
     {
         grid.add(group0);
         grid.add(group1);
@@ -58,6 +63,11 @@ public class saddledomeGrid {
     public int[] getGroup(int group)
     {
         return grid.get(group);
+    }
+
+    public ArrayList<int []> getGrid()
+    {
+        return grid;
     }
 
 

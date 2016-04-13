@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class SectionSearch extends AppCompatActivity {
 
     private ArrayList<Vendor> vendors;
-    private saddledomeGrid grid = new saddledomeGrid();
+    private saddledomeGrid grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class SectionSearch extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         vendors = new ArrayList<>();
+        grid = new saddledomeGrid();
 
         populateVendors();
         setButton();
@@ -81,7 +82,6 @@ public class SectionSearch extends AppCompatActivity {
         EditText searchText = (EditText) findViewById(R.id.sectionText);
         boolean notfound = false;
         int chosenSection = Integer.parseInt(searchText.getText().toString());
-        grid.populateGrid();
         int checkFor = grid.searchGrid(chosenSection);
         if(checkFor > -1)
         {

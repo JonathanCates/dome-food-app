@@ -20,7 +20,7 @@ public class Food implements Parcelable{
     public static int CHICKEN_FINGERS_TYPE = 5;
     public static int SNACKS_TYPE = 6;
     public static int BEER_TYPE = 7;
-    public static int DEFAULT_TYPE = 99; // main placeholder to indicate that the foodlist was not the initial choice for a customer
+    public static int DEFAULT_TYPE = -1; // main placeholder to indicate that the foodlist was not the initial choice for a customer
 
     /**
      * empty constructor for Firebase
